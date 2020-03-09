@@ -1,0 +1,36 @@
+/* Block: index */
+.alo-blog .block{margin-bottom: 0;}
+.alo-blog .block .block-content{margin-bottom: 0;padding: 0;border: 0;background-color: transparent;}
+.blog-image,.postcontent{position: relative;}
+.alo-blog .blog-image,.alo-blog .blog_short_text{float: left;width: 50%;}
+.post-text-hld.shortcontent-text,.post-text-hld.shortcontent-text p{line-height: 20px;color: #666666;padding-top: 0;}
+.blog_short_text{padding: 0 0 0 10px;}
+.blog_short_text .post-text-hld,.blog_short_text .post-text-hld p {color: #666;font-size: 14px;clear: both;}
+.block-recent-posts .block-content .blog_short_text .item.post-posed-date{padding: 0;}
+.blog_short_text .item.post-posed-date,.blog_short_text .post-date-bottom{margin: 0;}
+.post-posed-date{padding: 0px;margin: 0;font-size: 14px;color: #222;line-height: 35px;padding: 0 8px;border-radius: 3px;display: inline-block;}
+.post-posed-date .fa {font-size: 16px;padding-right: 10px;display: none;}
+.post-list-wrapper .post-list:before, .post-list-wrapper .post-list:after {display: table;content: " ";}
+.post-list-wrapper .post-list .post-holder:nth-child(2n+1) {clear: left;}
+
+.cats,.blog_short_text .post-categories {line-height: 17px;margin-bottom: 18px;padding-bottom: 8px;position: relative;}
+.cats:before,.blog_short_text .post-categories:before {border-bottom: 2px solid #e7e7e7;bottom: 0;content: "";height: 0;position: absolute;width: 20px;}
+.cats span,.blog_short_text .post-categories a {color: #df5c53;font-size: 12px;letter-spacing: 2px;text-transform: uppercase;}
+.blog_short_text .post-info a.post-item-link{padding: 10px 0;}
+.post-info a.post-item-link{display: block;font-size: 15px;line-height: 1.2;font-weight: bold;text-transform: uppercase;}
+.post-info a.post-item-link:hover{text-decoration: underline;}
+.post-read-more {margin: 10px 0 0;padding: 0px;display: inline-block;color: #666;text-align: left;font-size: 14px;font-weight: normal;}
+.post-read-more:after {content: "\f0a9";font-family: FontAwesome;padding-left: 5px;vertical-align: middle;}
+.post-list-wrapper .post-list {margin: 0 -15px 0 -15px; margin: 0 -15px;overflow: hidden;padding: 0;}
+.post-list-wrapper .post-list:before, .post-list-wrapper .post-list:after {display: table;content: " ";}
+.post-list-wrapper .post-title-holder,.post-view  .post-title-holder{border-bottom: 1px solid #e6e6e6;margin: 0 0 20px;padding: 0 0 15px;}
+.post-list-wrapper .post-posed-date,.post-view .post-posed-date{background-color: transparent; border-radius: 0;border-right: 1px solid #e6e6e6;font-size: 13px;color: #666666; margin-right: 10px;padding: 0 10px 0 0;float: left;line-height: normal;}
+.post-list-wrapper .post-posed-date .value,.post-view  .post-posed-date .value{padding: 0;line-height: normal;}
+.post-list-wrapper .item.post-categories,.post-view .item.post-categories{float: left;}
+.post-list-wrapper .post-list .post-read-more,.post-view .post-read-more{line-height: 37px;margin-top: 15px;padding: 0 26px;font-size: 14px;color: #222;border-radius: 3px;border: 1px solid #be952c;background-color: #f2c557;font-weight: 600;}
+.post-list-wrapper .post-list .post-read-more:after{display: none;}
+.post-bottom .block-title.title,.catalog-product-view .block-title.title{border-color: #eee;border-style: solid;border-width: 0 0 3px;margin-bottom: 30px;padding: 20px 0 0;}
+.post-nextprev-hld{text-align: right;}
+.nextprev-link.next-link{padding-left: 15px;}
+.catalog-product-view .block.related ul.block-content, .catalog-product-view .block.related ol.block-content {padding: 0 0 0 30px;}
+.post-view .products-grid .product-items{padding: 0;}

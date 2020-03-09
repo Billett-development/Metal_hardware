@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+		 <move element="product.info.overview" destination="product.content.left" after="page.main.title"/>
+		 <move element="product.info.overview" destination="product.content.left" after="product.info.price"/>
+		 <move element="product.shopcontent" destination="product.info.main" before="product.info"/>
+	     <move element="product.info.details" destination="content" after="product.detail"/>
+		 <move element="content.complete" destination="content" before="product.info.details"/>
+		 <move element="recently.viewed" destination="content.aside" before="catalog.product.related"/>
+		 <move element="alo.product.timer" destination="product.content.left" after="product.info.overview"/>
+		 <referenceBlock name="product.secondary.column" remove="true"/>
+		 <container name="content.complete" as="content_complete" label="Complete Container"  htmlTag="div" htmlClass="sections-content-complete wrap"/>
+		 <referenceContainer name="content.complete" htmlClass="additional-complete-policy-block">
+			 <block class="Magento\Cms\Block\Block" name="additional_complete_policy_block" before="-">
+				<arguments>
+				  <argument name="block_id" xsi:type="string">additional-complete-policy-block</argument>
+				</arguments>
+			  </block>
+		 </referenceContainer>
+		 <container name="recently.viewed" as="recently_viewed" label="Magiccart Recently Viewed"  htmlTag="div" htmlClass="sections-content-recently_viewed wrap"/>
+		 <referenceContainer name="recently.viewed" htmlClass="additional-recently-viewed-block">
+			 <block class="Magento\Cms\Block\Block" name="additional_recently_viewed_block" before="-">
+				<arguments>
+				  <argument name="block_id" xsi:type="string">additional-recently-viewed-block</argument>
+				</arguments>
+			  </block>
+		 </referenceContainer>
+		<block class="Magento\Reports\Block\Product\Widget\Viewed" cacheable="false" name="product.info.viewed" template="Magento_Reports::widget/viewed/content/viewed_grid.phtml" before="catalog.product.related">
+			 <arguments>
+			  <argument name="page_size" xsi:type="number">9999</argument>
+			 </arguments>
+		</block>
+		<container name="alo.product.timer" as="alo_product_timer" label="Alo Product Timer"  htmlTag="div" htmlClass="sections-content-timer wrap"/>
+		<referenceContainer name="alo.product.timer" htmlClass="additional-timer-block">
+			<block class="Magento\Catalog\Block\Product\View" name="product.timer" as="product_timer" template="product/view/timer.phtml">
+				<arguments>
+					<argument translate="true" name="title" xsi:type="string">Timer</argument>
+				</arguments>
+			</block>
+		</referenceContainer>
+		
+		<!-- <block class="Magento\Reports\Block\Product\Widget\Viewed" cacheable="false" name="product.info.viewed" template="Magento_Reports::widget/viewed/content/viewed_grid.phtml" before="catalog.product.related" >
+		   <arguments>
+				  <argument name="cache_lifetime" xsi:type="number">0</argument>
+			  </arguments>
+		</block> -->
+		
+		<!-- <block class="Magento\Reports\Block\Product\Widget\Viewed" cacheable="false" name="product.info.viewed" template="Magento_Reports::widget/viewed/content/viewed_grid.phtml" before="catalog.product.related">
+			<action method="setCacheLifetime"><value>false</value></action>
+		</block> -->
+    </body>
+</page>

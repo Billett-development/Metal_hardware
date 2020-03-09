@@ -1,0 +1,69 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php
+/**
+ * @var $block \Magento\Reports\Block\Product\Viewed
+ */
+?>
+<?php
+if ($exist = ($block->getRecentlyViewedProducts() && $block->getRecentlyViewedProducts()->getSize())) {
+    $type = 'widget-viewed';
+    $mode = 'grid';
+
+    $type = $type . '-' . $mode;
+
+    $image = 'recently_viewed_products_grid_content_widget';
+    $title = __('Recently Viewed');
+    $items = $block->getRecentlyViewedProducts();
+
+    $showWishlist = true;
+    $showCompare = true;
+    $showCart = true;
+    $rating = 'short';
+    $description = ($mode == 'list') ? true : false;
+}
+?>
+<?php if ($exist):?>
+    <div class="block widget hot-categories block-viewed-products-<?php /* @escapeNotVerified */ echo $mode; ?>">
+        <div class="block-title">
+            <strong role="heading" aria-level="2"><?php /* @escapeNotVerified */ echo $title; ?></strong>
+        </div>
+        <div class="block-content slide-inner clearfix"
+			data-autoplay="false" 
+			data-arrows="true" 
+			data-autoplay-speed="3000" 
+			data-dots="false" 
+			data-infinite="true" 
+			data-vertical="false" 
+			data-vertical-swiping="false"
+			data-responsive='[{"breakpoint": "1201", "settings": {"slidesToShow": "8"}}, {"breakpoint": "991", "settings": {"slidesToShow": "6"}}, {"breakpoint": "769", "settings": {"slidesToShow": "5"}}, {"breakpoint": "641", "settings": {"slidesToShow": "2"}}, {"breakpoint": "481", "settings": {"slidesToShow": "1"}}, {"breakpoint": "361", "settings": {"slidesToShow": "1"}}, {"breakpoint": "1", "settings": {"slidesToShow": "1"}}]'
+			data-rows="1"
+			data-slides-to-show="8" 
+			data-swipe-to-slide="true"
+		>
+            <?php /* @escapeNotVerified */ echo '<!-- ' . $image . '-->' ?>
+            <div class="products-<?php /* @escapeNotVerified */ echo $mode; ?> <?php /* @escapeNotVerified */ echo $mode; ?>">
+                <ol class="main-content products-grid-categories product-items <?php /* @escapeNotVerified */ echo $type; ?>">
+                    <?php $iterator = 1; ?>
+                    <?php foreach ($items as $_item): ?>
+                        <?php /* @escapeNotVerified */ echo($iterator++ == 1) ? '<li class="item product-item">' : '</li><li class="item product-item">' ?>
+                        <div class="product-item-info">
+                            <a href="<?php /* @escapeNotVerified */ echo $block->getProductUrl($_item) ?>" class="product-item-photo">
+                                <?php echo $block->getImage($_item, $image)->toHtml(); ?>
+                            </a>
+                        </div>
+                        <?php echo($iterator == count($items)+1) ? '</li>' : '' ?>
+                    <?php endforeach ?>
+                </ol>
+            </div>
+            <?php echo $block->getPagerHtml() ?>
+        </div>
+    </div>
+<?php endif;?>

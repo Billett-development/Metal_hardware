@@ -1,0 +1,118 @@
+<?php
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/**
+ * @var \Magento\Theme\Block\Html\Header $block
+ */
+
+?>
+<?php 
+ $objectManager = \Magento\Framework\App\ObjectManager::getInstance(); 
+ $_logo = $objectManager->create('\Magento\Theme\Block\Html\Header\Logo');
+ $customerSession = $objectManager->get('Magento\Customer\Model\SessionFactory')->create();
+?>
+<link href="//fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&amp;subset=latin-ext,vietnamese" rel="stylesheet"> 
+<link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&amp;subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese" rel="stylesheet"> 
+<header class="page-header alothemes">
+    <div class="header">
+         <?php if ($_logo->isHomePage()):?>
+         	<?php echo $block->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('header-promotion')->toHtml();?>
+         <?php endif; ?>
+		<div class="header-content">
+			<div class="container">
+			    <div class="box-width main-fix head-position clearfix">
+					<div class="row clearfix">
+					    <div class="content-logo col-sm-12 col-md-6 col-lg-6">
+							<div class="header-logo">
+								<?php echo $this->getChildHtml('logo'); ?>
+							</div>
+						</div>
+						<div class="hidden-top-bar fixed-mobile col-sm-12 col-md-6 col-lg-6">
+							<div class="tool-topsearch alo-toggle toggle-tab-mobile">
+								<span class="toggle-tab mobile"><i class="icon fa fa-search icons"></i></span>
+							    <div class="toggle-content-none">
+									<?php echo $this->getChildHtml('top.search'); ?>
+								</div>
+							</div>
+						</div>
+						<div class="setting-up col-sm-12 col-md-1 col-lg-1">
+							<div class="tool-setting">
+								<div class="header-setting currency_top">
+									<div class="settting-switcher">
+										<?php echo $this->getChildHtml('currency'); ?>
+									</div>
+								</div>
+								<div class="header-setting">
+									<div class="settting-switcher">
+										<?php echo $this->getChildHtml('store_language'); ?>
+									</div>
+								</div>
+								<div class="top-link-product">
+									<a title="Compare Products" href="<?php echo $this->getUrl('catalog/product_compare') ?>" target="_blank" class="btn-compare icon compare">
+									   <span class="text"><?php echo __('Compare'); ?></span>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="header-bottom">
+            <div class="header-sticker">
+				<div class="container">
+				    <div class="box-width main-fix clearfix">
+						<div class="row">
+							<div class="col-sm-12 visible-md-on">
+								<?php echo $this->getChildHtml('navigation.sections'); ?>
+							</div>
+						</div>
+						<div class="header-icons content-cart">
+						    <div class="tool-header alotheme">
+						        <div class="tool-account alo-toggle tool-padding toggle-tab-mobile">
+									<div class="toggle-tab outside-close mobile">
+										<span class="fa fa-user icons account-icons"></span>
+										<div class="onclick">
+											<div class="text-account text-bold"><?php echo __('Account'); ?></div>
+											<div class="text-account text-hidden">
+												<?php 
+													if($customerSession->isLoggedIn()) {
+														echo sprintf(__('Hello! %s'), $customerSession->getCustomer()->getFirstname());
+													} else {
+														echo __('Hello! Sign in'); 
+													}
+												?>
+											</div>
+										</div>
+									</div>
+								    <div class="toggle-content">
+										<?php echo $this->getChildHtml('header.links'); ?>
+									</div>
+								</div>
+								<div class="top-link-product tool-padding">
+								     <span class="fa fa-heart icons wishlist-icons"></span>
+									 <div class="wishlist">
+										 <a title="<?php echo __('Wishlist'); ?>" href="<?php echo $this->getUrl('wishlist') ?>" target="_blank" class="icon btn-heart">
+										 <span class="text-account text-bold block"><?php echo __('Wishlist'); ?></span>
+										 <?php $counter = $this->helper('Magento\Wishlist\Helper\Data')->getItemCount() ?>
+											<?php /* if($counter): */ ?>
+												<span class="counter"><?php echo $counter > 0 ? $counter:0; ?></span>
+											<?php /* endif; */ ?>
+											<span class="text-account text-hidden"><?php echo __('item(s)'); ?></span>
+										</a>
+									</div>
+								</div>
+								<?php echo $this->getChildHtml('minicart'); ?>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>		
+	</div>
+</header>

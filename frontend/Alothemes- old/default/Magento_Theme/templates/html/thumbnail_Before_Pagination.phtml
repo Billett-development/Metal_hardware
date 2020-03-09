@@ -1,0 +1,55 @@
+<?php 
+$host =  "magetno2.ci3uj2kvqvcg.eu-west-2.rds.amazonaws.com";											// Host name or ip
+$port = "3306";																							// Port number
+$username = "admin";																					// Connection username
+$password = "%'m4rB1301'%";																				// Connection password
+$database = "magento2_db";																				// Database name
+$conn = new mysqli($host, $username, $password, $database);												// Create connection
+if ($conn->connect_error) {die("Connection failed: " . $conn->connect_error);}							// Check connection, if broken then display the error
+$sql = "SELECT * FROM new_thumbnail_search ORDER BY name DESC;";															// select all from the view
+$result = $conn->query($sql);																			// use $result as the variable for the connection and data select
+if ($result->num_rows > 0) { 																			// check there is data in the view (Must be more than 1)
+
+// EXPORT FILE TO PYTHON DIRECTORY
+// RUN PYTHON SCRIPT - MH Thumbnail Search Processor.py
+// PUT TABLE IN NAVICAT
+?> 
+
+<div class="row">
+	<div class="col">
+		<p>Use our Thumbnail Search to browse a small image of all of our products to find what you're looking for</p>
+	</div>
+</div>
+
+<div class="row">
+	<?php while($row = $result->fetch_assoc()) { ?>
+		<a href="<?php echo $row["url_key"] ?>">
+			<div class="thumb">
+				<img width="80" height="80" alt="<?php echo $row["name"] . ' - ' . $row["sku"]?>" class="img185 lazyload" loading="lazy" data-src="<?php echo $row["thumbnail_image"] ?>" >
+			</div>
+		</a>
+	<?php } ?>
+</div>
+
+<br>
+<?php
+} else { echo "Something Seems to be Wrong. We're working on it!"; }				//if theres nothing in the table to be displayed do this
+$conn->close(); 																	//close connection to improve server performance
+?>  
+
+
+<script>
+  if ('loading' in HTMLImageElement.prototype) {
+    const images = document.querySelectorAll('img[loading="lazy"]');
+    images.forEach(img => {
+      img.src = img.dataset.src;
+    });
+  } else {
+    // Dynamically import the LazySizes library
+	console.log('boo!')
+    const script = document.createElement('script');
+    script.src =
+      'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/4.1.8/lazysizes.min.js';
+    document.body.appendChild(script);
+  }
+</script>

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magiccart 
+ * @category    Magiccart 
+ * @copyright   Copyright (c) 2014 Magiccart (http://www.magiccart.net/) 
+ * @license     http://www.magiccart.net/license-agreement.html
+ * @Author: DOng NGuyen<nguyen@dvn.com>
+ * @@Create Date: 2018-07-27 11:38:07
+ * @@Modify Date: 2018-07-27 11:38:17
+ * @@Function:
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="block_footer_top" remove="true"/>
+    </body>
+</page>
