@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Meetanshi_Callforprice::callforprice" resource="Meetanshi_Callforprice::callforprice"
+             module="Meetanshi_Callforprice" title="Call For Price" sortOrder="30"/>
+        <add id="Meetanshi_Callforprice::callfordata" resource="Meetanshi_Callforprice::callfordata"
+             module="Meetanshi_Callforprice" title="Call For Price Inquiries" sortOrder="10"
+             action="callforprice/callforprice/index" parent="Meetanshi_Callforprice::callforprice"/>
+        <add id="Meetanshi_Callforprice::config" resource="Meetanshi_Callforprice::config"
+             module="Meetanshi_Callforprice" title="Configuration" sortOrder="20"
+             action="adminhtml/system_config/edit/section/callforprice" parent="Meetanshi_Callforprice::callforprice"/>
+    </menu>
+</config>

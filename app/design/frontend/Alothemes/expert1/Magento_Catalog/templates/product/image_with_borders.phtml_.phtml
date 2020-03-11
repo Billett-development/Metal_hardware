@@ -1,0 +1,52 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+<?php /** @var $block \Magento\Catalog\Block\Product\Image */ ?>
+<?php
+    $image_hover_cfg   = 'category_page_list';
+    $_imageHelper      = $this->helper('Magento\Catalog\Helper\Image');
+    $objectManager     = \Magento\Framework\App\ObjectManager::getInstance();
+    $_product          = $objectManager->create('Magento\Catalog\Model\Product')->load($block->getProductId());
+    $images            = $_product->getMediaGalleryImages();
+    $imageUrl          = $block->getImageUrl();
+    $imageUrlHover     = '';
+    foreach ($images as $imagehv) {
+        if($imagehv){
+            $imagehv = $imagehv->getFile();
+            $hoverImage = $_imageHelper->init($_product, $image_hover_cfg)->setImageFile($imagehv)->resize($block->getWidth(), $block->getHeight());
+            $imageUrlHover = $hoverImage->getUrl();
+        }
+        if ( basename($imageUrl) == basename($imageUrlHover) ){
+            $imageUrlHover = '';
+        } else {
+            break; 
+        }
+    }
+    // $blankImage    = $this->getViewFileUrl('images/loader-1.gif'); // default magento
+    $blankImage    = $this->getViewFileUrl('images/blank.png'); 
+?>
+<span class="product-image-container"
+      style="width:<?= /* @escapeNotVerified */ $block->getWidth() ?>px;">
+    <span class="product-image-wrapper"
+          style="padding-bottom: <?= /* @escapeNotVerified */ ($block->getRatio() * 100) ?>%;">
+        <img class="<?= /* @escapeNotVerified */ $block->getClass() ?> img-fluid lazyload"
+            <?= /* @escapeNotVerified */ $block->getCustomAttributes() ?>
+            data-src="<?= /* @escapeNotVerified */ $imageUrl ?>"
+            src="<?= /* @escapeNotVerified */ $blankImage ?>"
+            width="<?= /* @escapeNotVerified */ $block->getWidth() ?>"
+            height="<?= /* @escapeNotVerified */ $block->getHeight() ?>"
+            alt="<?= /* @escapeNotVerified */ $block->stripTags($block->getLabel(), null, true) ?>"/>
+        <?php if( $imageUrlHover ) : ?>
+        <img class="<?= /* @escapeNotVerified */ $block->getClass() ?> img-fluid lazyload thumbnail"
+            <?= /* @escapeNotVerified */ $block->getCustomAttributes() ?>
+            data-src="<?= /* @escapeNotVerified */ $imageUrlHover ?>"
+            src="<?= /* @escapeNotVerified */ $blankImage ?>"
+            width="<?= /* @escapeNotVerified */ $block->getWidth() ?>"
+            height="<?= /* @escapeNotVerified */ $block->getHeight() ?>"
+            alt="<?= /* @escapeNotVerified */ $block->stripTags($hoverImage->getLabel(), null, true) ?>"/>
+        <?php endif; ?>
+    </span>
+</span>

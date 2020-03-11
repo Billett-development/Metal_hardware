@@ -1,0 +1,199 @@
+<?php
+if($block->getCategoryId()) {
+$category_id = $block->getCategoryId();
+
+$om = \Magento\Framework\App\ObjectManager::getInstance();
+$sc = $om->get('\Magento\Framework\App\Config\ScopeConfigInterface');
+$isEnabled = $sc->getValue('imagegallery/general/enabled',Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+
+if($isEnabled == 1){
+
+$getCategorytitle       =  $this->helper('Vsourz\Imagegallery\Helper\Data')->getCategorytitle();
+$getCategorydescription =  $this->helper('Vsourz\Imagegallery\Helper\Data')->getCategorydescription();
+$getImagetitle          =  $this->helper('Vsourz\Imagegallery\Helper\Data')->getImagetitle();
+$getImagedescription    =  $this->helper('Vsourz\Imagegallery\Helper\Data')->getImagedescription();
+
+$imagegallerydata  = $block->getImageGalleryCollection();
+$imageData         = $block->getImageCollection();
+$catData           = $block->getCategoryCollection();
+
+$catid="";
+?>
+
+<div class="image-gallery-outer">
+	<div class="category-desc">
+	<?php
+	if(isset($catData['catFlag']) && $catData['catFlag'] == true){ ?>
+		<h4> <?php
+			foreach($catData as $key => $_value)
+			{
+				$cattitle = $_value['title'];
+				echo $cattitle;
+			}
+				echo " Category data not found...!";
+			?>
+		</h4>
+	<?php }else{
+	foreach($catData as $key => $value)
+	{
+		$catid=$value['category_id'];
+		?>
+       <?php
+	   if($getCategorytitle == 1 && $value['title_status'] == 1){
+		  $Categorytitle =  $value['title'];
+	   }else{
+		  $Categorytitle ="";
+	   }
+	   ?>
+		<div class="title">
+			<h3><?php echo $Categorytitle; ?></h3>
+		</div>
+		<?php
+		if($value['image']): ?>
+			<div class="cat-img">
+				<img src="<?php echo $this->getUrl('pub/media/').$value['image']; ?>" title="<?php echo $Categorytitle; ?>" alt="<?php echo $Categorytitle; ?>"/>
+			</div>
+
+	<?php  endif; ?>
+	   <?php
+	   if($getCategorydescription == 1 && $value['description_status'] == 1){
+		  $Categorydescription =  $value['description'];
+	   }else{
+		  $Categorydescription = "";
+	   }
+	   ?>
+		<?php if($Categorydescription): ?>
+			<div class="cat-desc">
+				<?php echo $Categorydescription; ?>
+			</div><?php
+			endif;
+		?><?php
+	}
+  }
+	?>
+	</div>
+<?php if ($catid) { ?>
+	<div class="image-detail">
+		<ul id="masonry-loop-<?php echo $catid;?>">
+		<?php foreach($imageData as $data){
+?>
+			<li class="gallery-item">
+				<div class="img-box">
+					<div class="img-box-inner">
+                      <?php if($data['image_photo']){?>
+						<a class="imagegallery" href="javascript:;" title="<?php echo $data['image_title']; ?>"><img src="<?php echo $this->getUrl('pub/media/').$data['image_photo']; ?>" alt="<?php echo $data['image_title']; ?>" width="300" height="500"/></a>
+                        <?php } else{
+						$Newimage_url = $this->getViewFileUrl('Vsourz_Imagegallery::images/gallery-img-new.jpg');
+
+						?>
+                        <a class="imagegallery" href="#" title="<?php echo "New Image"; ?>"><img src="<?php echo $Newimage_url; ?>" alt="<?php echo "New Image"; ?>" width="300" height="500"/></a>
+
+                        <?php }?>
+						<div class="gallery-desc-box">
+							<div class="gallery-content">
+								<h3 class="gallery-title">
+                                <?php
+								   if($getImagetitle == 1 && $data['image_title_status'] == 1){
+									  $Imagetitle =  $data['image_title'];
+								   }else{
+									  $Imagetitle = "";
+								   }
+
+								   if($getImagedescription == 1 && $data['image_description_status'] == 1){
+									  $Imagedescription =  $data['description'];
+
+								   }else{
+									  $Imagedescription = "";
+								   }
+
+								 ?>
+                                 <?php if($data['image_photo']){ ?>
+                                 <?php echo $Imagetitle; ?>
+
+                                 <?php } else{ ?>
+                                 <?php echo $Imagetitle; ?>
+
+                                 <?php }?>
+								</h3>
+								<?php if($Imagedescription): ?>
+								<div class="gallery-desc">
+									<?php
+										 $Imagedescription = substr($Imagedescription, 0, 100);
+									echo $Imagedescription; ?>
+								</div>
+								<?php endif; ?>
+                                <?php if($data['image_photo']) {?>
+								<a class="image-link gallery-block image-link<?php echo $catid; ?>" data-effect="mfp-move-horizontal" href="<?php echo  $this->getUrl('pub/media/').$data['image_photo']; ?>" title="<?php echo $Imagetitle; ?>"><?php ///echo $Imagetitle; ?>
+									<i class="fa"></i>
+								</a>
+                                <?php }else{ ?>
+                                <a class="image-link gallery-block image-link<?php echo $catid; ?>" data-effect="mfp-move-horizontal" href="<?php echo  $Newimage_url; ?>" title="<?php echo "Image Gallery"; ?>"><?php echo $Newimage_url; ?>
+									<i class="fa"></i>
+								</a>
+                               <?php } ?>
+							</div>
+						</div>
+					</div>
+				</div>
+			</li>
+		<?php }; ?>
+		</ul>
+<script type="text/javascript">
+	// require the require function
+	requirejs( [ 'require', 'jquery', 'https://unpkg.com/masonry-layout@4.1/dist/masonry.pkgd.min.js', 'https://npmcdn.com/imagesloaded@4.1/imagesloaded.pkgd.min.js' ],
+	  function( require, $, Masonry, ImagesLoaded ) {
+	    // require jquery-bridget, it's included in masonry.pkgd.js
+	    require( [ 'jquery-bridget/jquery-bridget' ],
+	    function( jQueryBridget ) {
+	      	// make Masonry a jQuery plugin
+	      	jQueryBridget( 'masonry', Masonry, $ );
+	      	jQueryBridget( 'imagesloaded', ImagesLoaded, $ );
+	      	// jQueryBridget( 'masonry', Masonry, $ );
+	      	// now you can use $().masonry()
+
+	     	$('#masonry-loop-<?php echo $catid;?>').imagesloaded(function(){
+		     	$('#masonry-loop-<?php echo $catid;?>').masonry({
+		      		columnWidth: 0,
+			        transitionDuration: 500
+		      	});
+	      	});
+	    }
+	  );
+	});
+</script>
+
+	</div>
+<?php } ?>
+</div>
+
+<?php }
+	else
+	{
+		echo '<script type="text/javascript">';
+		echo 'window.location.href="'.$this->getUrl('').'";';
+		echo '</script>';
+	}
+	}
+	else 
+	{
+	echo '<script type="text/javascript">';
+	echo 'window.location.href="'.$this->getUrl('').'";';
+	echo '</script>';
+	}?>
+
+
+<script type="text/javascript" charset="utf-8">
+    require([
+            "jquery",
+			"jquery/jquery-ui",
+			"Vsourz_Imagegallery/js/magnific-popup"
+
+    ],function($){
+
+		  $(document).ready(function(){
+
+		   });
+
+ });
+
+</script>

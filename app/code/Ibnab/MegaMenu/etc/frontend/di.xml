@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Created by wilson.sun330@gmail.com
+ * Date: 13/05/2015
+ * Time: 5:02 PM
+*/
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+    <type name="Magento\Catalog\Model\ResourceModel\Category\Collection">
+        <plugin name="megamenu_push_collection_after" type="Ibnab\MegaMenu\Plugin\AddAttributeToSelect"/>
+    </type>
+    <preference for="Magento\Catalog\Plugin\Block\Topmenu" type="Ibnab\MegaMenu\Plugin\AddAttributeToSelect" />
+</config>

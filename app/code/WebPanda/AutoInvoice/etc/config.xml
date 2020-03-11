@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author      WebPanda
+ * @package     WebPanda_AutoInvoice
+ * @copyright   Copyright (c) WebPanda (https://webpanda-solutions.com/)
+ * @license     https://webpanda-solutions.com/license-agreement
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <auto_invoice>
+            <default>
+                <order_total>zero_total</order_total>
+                <enabled_invoice>1</enabled_invoice>
+                <enabled_send_invoice_mail>0</enabled_send_invoice_mail>
+                <enabled_shipment>1</enabled_shipment>
+                <enabled_send_shipment_mail>0</enabled_send_shipment_mail>
+            </default>
+        </auto_invoice>
+    </default>
+</config>

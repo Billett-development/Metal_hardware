@@ -1,0 +1,73 @@
+.modal-popup.callforprice-popup.modal-slide._inner-scroll._show {
+    margin: 0 auto;
+}
+.modal-popup.callforprice-popup .modal-header > h1{
+    font-weight: bold;
+}
+.opencallforpopup {
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.modal-popup.callforprice-popup .modal-inner-wrap {
+    width: 450px;
+    margin: 0 auto;
+    margin-top: 15px;
+    left: inherit;
+}
+
+.modal-popup.callforprice-popup .modal-header {
+    text-align: center;
+}
+
+.frmcallforprice .field {
+    margin-bottom: 8px;
+}
+
+.modals-wrapper .modal-popup.callforprice-popup .modal-footer {
+    text-align: center;
+}
+
+.modal-popup.callforprice-popup .action.primary {
+    margin: 0px 10px;
+}
+
+.callfor-popup em {
+    color: red;
+}
+
+.opencallforpopup {
+    cursor: pointer;
+}
+
+
+@media screen and (max-width: 768px) {
+    .modals-wrapper .modal-popup.callforprice-popup {
+        margin-top: 15%;
+        left: 0;
+    }
+    .frmcallforprice .field.customer-name{
+        display: block;
+    }
+    .modal-popup.callforprice-popup .modal-inner-wrap{
+        background-color: #fff;
+    }
+    .modal-popup.callforprice-popup .modal-header > h1 {
+        font-size: 18px;
+        font-weight: bold;
+    }
+}
+@media screen and (max-width: 450px) {
+    .modals-wrapper .modal-popup.callforprice-popup, .modal-popup.callforprice-popup .modal-inner-wrap{
+        width: 95%;
+        min-width: 360px;
+    }
+}
+
+.callforlabel{
+    display: block;
+    margin-top: 7px;
+}
+.callforlabel span{
+    font-size: 18px;
+}

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget id="vsourz_category_image" class="Vsourz\Imagegallery\Block\Images" >
+        <label translate="true">Category Image Block</label>
+        <description translate="true">Vsourz Category Image</description>
+        <parameters>
+            <parameter name="id" xsi:type="text" required="true" visible="true" >
+                <label translate="true">Image ID</label>
+                <description translate="true">ex : 1</description>
+            </parameter>
+            <parameter name="template" xsi:type="select" visible="true" required="true">
+                <label translate="true">Template</label>
+                <options>
+                    <option name="default" value="Vsourz_Imagegallery::default.phtml" selected="true">
+                        <label translate="true">Imagegallery Default Template</label>
+                    </option>
+                </options>
+            </parameter>
+        </parameters>
+    </widget>
+</widgets>

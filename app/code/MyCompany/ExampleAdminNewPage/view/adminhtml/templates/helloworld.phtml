@@ -1,0 +1,227 @@
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+
+<style>
+.overlay {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0, 0.9);
+  overflow-x: hidden;
+  transition: 0.5s;
+}
+
+.overlay-content {
+  position: relative;
+  width: 100%;
+  text-align: center;
+  margin-top: 100px;
+}
+
+.overlay-content-div {
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-top: 10px;
+	border-radius: 10px;
+	font-size: 16px;
+	background: white;
+}
+
+.overlay-content-div li {
+	list-style: none;
+}
+
+.overlay a {
+  padding: 8px;
+  text-decoration: none;
+  font-size: 36px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.overlay a:hover, .overlay a:focus {
+  color: #f1f1f1;
+}
+
+.overlay .closebtn {
+  position: absolute;
+  top: 20px;
+  right: 45px;
+  font-size: 60px;
+}
+
+@media screen and (max-height: 450px) {
+  .overlay a {font-size: 20px}
+  .overlay .closebtn {
+  font-size: 40px;
+  top: 15px;
+  right: 35px;
+  }
+}
+</style>
+
+
+
+<?php
+$host =  "magetno2.ci3uj2kvqvcg.eu-west-2.rds.amazonaws.com";
+$port = "3306";
+$username = "admin";
+$password = "%'m4rB1301'%";
+$database = "magento2_db";
+$conn = new mysqli($host, $username, $password, $database);
+
+if ($conn->connect_error) { die("Connection failed: " . $conn->connect_error); };
+	
+$sql = "SELECT * FROM magento_1_orders;";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+?>
+
+<div class="row">
+        <div class="col">
+                <p>Below are the orders that we're placed on the old Metal Hardware site</p>
+        </div>
+</div>
+
+<div class="row">
+
+	<table id="example" class="table table-striped table-bordered table-responsive">
+		<tr>
+			<th>Order #</th>
+			<th>Order Date</th>
+			<th>Name</th>
+			<th>Order Total</th>
+			<th>Order Status</th>
+			<th>Action</th>
+		</tr>
+
+
+        <?php while($row = $result->fetch_assoc()) { ?>
+		<tr>
+			<td><?php echo $row["Order"] ?></td>
+			<td><?php echo $row["Purchased On"] ?></td>
+			<td><?php echo $row["Bill to Name"] ?></td>
+			<td>£<?php echo $row["GT Purchased"] ?></td>
+			<td><?php echo $row["Status"] ?></td>
+			<td><a href='#' style="cursor:pointer" onclick="openNav<?php echo $row["Order"] ?>()">View</a></td>
+		</tr>
+
+
+
+		<div id="myNav<?php echo $row["Order"] ?>" class="overlay">
+			<a href="javascript:void(0)" class="closebtn" onclick="closeNav<?php echo $row["Order"] ?>()">&times;</a>
+			<div class="overlay-content">
+
+				<div class="overlay-content-div" style="float:left; width:41%; margin-left: 8%;" align="left">
+					<p><u><strong>Order Details</strong></u></p>
+					<ul>
+						<li>Order Number: <?php echo $row["Order"] ?></li>
+						<li>Purchase Date: <?php echo $row["Purchased On"] ?></li>
+						<li>Customer Name: <?php echo $row["Bill to Name"] ?></li>
+						<li>Email: <?php echo $row["Email (Customer)"] ?></li>
+						<li>Order Total <i>(Inc VAT)</i>: £<?php echo $row["GT Purchased"] ?></li>
+						<li>Customer Logged In?: <?php echo $row["LI?"] ?></li>
+						<li>Order Status: <?php echo $row["Status"] ?></li>
+					</ul>
+					
+					<hr>
+					
+					<p><u><strong>Order Parts:</strong></u></p>
+					<?php
+					$sql2 = "SELECT * FROM magento_1_orders_products WHERE increment_id = " . $row["Order"] . ";";
+					$result2 = $conn->query($sql2);
+
+					if ($result2->num_rows > 0) {
+					?>
+						<ul>
+							<li><u>Sku&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;Part Name&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;Qty&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;Price <i>(Exc. VAT)</i>&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;Row Total <i>(Exc. VAT)</i></u></li>
+							<?php while($row2 = $result2->fetch_assoc()) { ?>
+								<li>
+									<?php echo $row2["sku"]  . "&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;" .
+									$row2["name"]  . "&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;" .
+									$row2["qty_ordered"] . "&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;£" .
+									$row2["price"] . "&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;£" .
+									$row2["row_total"] ?>
+								</li>
+							<?php } ?>
+							<br>
+							<li><i><strong>Order Total (Inc. VAT):</strong> £<?php echo $row["GT Purchased"] ?></i></li>
+						</ul>
+					<?php } ?>
+				</div>
+				
+				<div class="overlay-content-div" style="float:right; width: 41%; margin-right: 8%;" align="left">
+					<p><u><strong>Billing Details</strong></u></p>
+					<ul>
+						<li>Billing Name: <?php echo $row["Prefix (Billing Address)"] . " " . $row["First Name (Billing Address)"] . " " . $row["Last Name (Billing Address)"]  ?></li>
+						<li>Billing Email: <?php echo $row["Email (Billing Address)"] ?></li>
+						<li>Billing Phone: 0<?php echo $row["Telephone (Billing Address)"] ?></li>
+						<li>Billing Fax: <?php echo $row["Fax (Billing Address)"] ?></li>
+						<li>
+							Billing Address: <?php echo "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . 
+							$row["Company (Billing Address)"] . "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . 
+							$row["Street Address (Billing Address)"] . "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . 
+							$row["City (Billing Address)"] . "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . 
+							$row["State/Province (Billing Address)"] . "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . 
+							$row["Zip/Postal Code (Billing Address)"] ?>
+						</li>
+					</ul>
+					
+					<hr>
+					
+					<p><u><strong>Shipping Details</strong></u></p>
+					<ul>
+						<li>Shipping Name: <?php echo $row["Prefix (Shipping Address)"] . " " . $row["First Name (Shipping Address)"] . " " . $row["Last Name (Shipping Address)"]  ?></li>
+						<li>Shipping Email: <?php echo $row["Email (Shipping Address)"] ?></li>
+						<li>Shipping Phone: 0<?php echo $row["Telephone (Shipping Address)"] ?></li>
+						<li>Shipping Fax: <?php echo $row["Fax (Shipping Address)"] ?></li>
+						<li>Shipping Method: <?php echo $row["Description (Shipping)"] ?></li>
+						<li>
+							Shipping Address: <?php echo "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . 
+							$row["Company (Shipping Address)"] . "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . 
+							$row["Street Address (Shipping Address)"] . "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . 
+							$row["City (Shipping Address)"] . "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . 
+							$row["State/Province (Shipping Address)"] . "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . 
+							$row["Zip/Postal Code (Shipping Address)"] ?>
+						</li>
+					</ul>
+				</div>
+
+			</div>
+		</div>
+
+
+		<script>
+			function openNav<?php echo $row["Order"] ?>() {
+			  document.getElementById("myNav<?php echo $row["Order"] ?>").style.width = "100%";
+			}
+
+			function closeNav<?php echo $row["Order"] ?>() {
+			  document.getElementById("myNav<?php echo $row["Order"] ?>").style.width = "0%";
+			}
+		</script>
+
+        <?php } ?>
+
+	</table>
+
+</div>
+
+<?php
+} else { echo "Something Seems to be Wrong. We're working on it!"; }
+$conn->close();
+?>

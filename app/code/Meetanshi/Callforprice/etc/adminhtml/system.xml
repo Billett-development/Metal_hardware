@@ -1,0 +1,177 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../Magento/Config/etc/system_file.xsd">
+    <system>
+        <tab id="meetanshi" translate="label" sortOrder="100">
+            <label><![CDATA[<img src="https://meetanshi.com/media/logo.png" alt="Meetanshi" height="15" style="vertical-align:middle;"/>]]></label>
+        </tab>
+        <section id="callforprice" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Call For Price</label>
+            <tab>meetanshi</tab>
+            <resource>Meetanshi_Callforprice::config_callforprice</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Configuration</label>
+                <field id="active" translate="label" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Call For Price</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="enablefor" translate="label" type="select" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Call For Price Scope</label>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                    <comment>Product price will be hidden for selected scope</comment>
+                    <source_model>Meetanshi\Callforprice\Model\Config\Source\Enablefor</source_model>
+                </field>
+                <field id="display_categories" translate="label" type="multiselect" sortOrder="17" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Select Categories</label>
+                    <depends>
+                        <field id="active">1</field>
+                        <field id="enablefor" separator=",">category</field>
+                    </depends>
+                    <source_model>Meetanshi\Callforprice\Model\Config\Source\Categories</source_model>
+                    <comment>Product price will be hidden for selected Categories.</comment>
+                </field>
+                <field id="typeas" translate="label" type="select" sortOrder="18" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Call For Price As</label>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                    <source_model>Meetanshi\Callforprice\Model\Config\Source\Typeas</source_model>
+                </field>
+                <field id="displayed_text" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Button Text</label>
+                    <depends>
+                        <field id="active">1</field>
+                        <field id="typeas" separator=",">button</field>
+                    </depends>
+                    <validate>required-entry validate-length maximum-length-30</validate>
+                    <comment>Add to cart button will be replaced with the text added here.</comment>
+                </field>
+                <field id="displayed_text_label" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Label Text</label>
+                    <depends>
+                        <field id="active">1</field>
+                        <field id="typeas" separator=",">label</field>
+                    </depends>
+                    <validate>required-entry validate-length maximum-length-30</validate>
+                    <comment>Add to cart button will be replaced with the text added here.</comment>
+                </field>
+                <field id="label_color" translate="label" type="text" sortOrder="22" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Label Text Color</label>
+                    <validate>required-entry</validate>
+                    <frontend_model>Meetanshi\Callforprice\Block\Color</frontend_model>
+                    <depends>
+                        <field id="active">1</field>
+                        <field id="typeas" separator=",">label</field>
+                    </depends>
+                </field>
+                <field id="header_text" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Call For Price Form Title</label>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+                <field id="allow_customer_group" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Call For Price for Selected Groups</label>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="display_customer_group" translate="label" type="multiselect" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Select Customer Groups</label>
+                    <depends>
+                        <field id="active">1</field>
+                        <field id="allow_customer_group">1</field>
+                    </depends>
+                    <comment>Product price will be hidden for selected customer groups only.</comment>
+                    <source_model>Meetanshi\Callforprice\Model\Config\Source\Groups</source_model>
+                </field>
+            </group>
+            <!-- Privacy Setting -->
+            <group id="privacy_setting" translate="label" type="text" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Privacy Checkbox Settings</label>
+                <field id="privacy_enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Privacy Checkbox</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <depends>
+                        <field id="callforprice/general/active">1</field>
+                    </depends>
+                </field>
+                <field id="privacy_text" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Privacy Notice Text</label>
+                    <comment><![CDATA[]]></comment>
+                    <depends>
+                        <field id="privacy_enable">1</field>
+                    </depends>
+                </field>
+                <field id="show_privacy_policy" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Privacy Policy Redirection Page</label>
+                    <source_model>Magento\Cms\Model\Config\Source\Page</source_model>
+                    <depends><field id="privacy_enable">1</field></depends>
+                </field>
+            </group>
+            <group id="adminemail" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Admin Email Settings</label>
+                <field id="adminemail" translate="label" type="text" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="5">
+                    <label>Admin Email ID</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <validate>required-entry validate-email</validate>
+                </field>
+                <field id="emailsender" translate="label" type="select" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="10">
+                    <label>Email Sender</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+                </field>
+                <field id="emailtemplate" translate="label" type="select" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="15">
+                    <label>Email Template</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                </field>
+            </group>
+            <group id="customeremail" translate="label" type="text" sortOrder="22" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Auto Reply Email Settings</label>
+                <field id="customeractive" translate="label" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Auto Reply Email to Customer</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="emailsender" translate="label" type="select" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="10">
+                    <label>Email Sender</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+                    <depends><field id="customeractive">1</field></depends>
+                </field>
+                <field id="emailtemplate" translate="label" type="select" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="15">
+                    <label>Email Template</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    <depends><field id="customeractive">1</field></depends>
+                </field>
+            </group>
+            <group id="recaptcha_setting" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Google reCAPTCHA Settings</label>
+                <field id="recaptcha_enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Google reCAPTCHA</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <depends>
+                        <field id="callforprice/general/active">1</field>
+                    </depends>
+                </field>
+                <field id="sitekey" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Site Key</label>
+                    <depends>
+                        <field id="recaptcha_enable">1</field>
+                    </depends>
+                    <validate>required-entry</validate>
+                    <comment><![CDATA[Register with <a target="_blank" href="https://www.google.com/recaptcha/admin">Google reCAPTCHA </a>to get your site key.]]></comment>
+                </field>
+                <field id="secret_key" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Secret key</label>
+                    <depends>
+                        <field id="recaptcha_enable">1</field>
+                    </depends>
+                    <validate>required-entry</validate>
+                    <comment><![CDATA[Register with <a target="_blank" href="https://www.google.com/recaptcha/admin">Google reCAPTCHA </a>to get your secret key.]]></comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

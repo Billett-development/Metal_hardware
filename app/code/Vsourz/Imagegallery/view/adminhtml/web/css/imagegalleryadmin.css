@@ -1,0 +1,24 @@
+
+.field.with-note pre{
+	display:block;
+	position:relative;
+}
+
+.field.with-note code .example{
+	display:block;
+	color:#ff0000;
+	padding-bottom:10px;
+	margin-bottom:10px;
+	border-bottom:1px solid #dfdfdf;
+}
+
+.field.with-note code{
+	display:block;
+	position:relative;
+	padding:10px;
+	background-color:#efefef;
+	border:1px solid #dfdfdf;
+	border-radius:6px;
+	white-space:pre-line;
+	line-height:20px;
+}

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+
+    <virtualType name="Meetanshi\Callforprice\Model\ResourceModel\Callforprice\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">meetanshi_callforprice</argument>
+            <argument name="resourceModel" xsi:type="string">Meetanshi\Callforprice\Model\ResourceModel\Callforprice</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="callforprice_inquiry_list_data_source" xsi:type="string">Meetanshi\Callforprice\Model\ResourceModel\Callforprice\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+	<type name="Magento\Catalog\Model\Product">
+        <plugin name="callforprice" type="Meetanshi\Callforprice\Plugin\Catalog\Model\Product" sortOrder="1"/>
+    </type>
+	<type name="Magento\Catalog\Pricing\Render\FinalPriceBox">
+        <plugin name="callforprice" type="Meetanshi\Callforprice\Plugin\Catalog\Pricing\Render\FinalPriceBox" sortOrder="2"/>
+    </type>
+	<type name="Magento\Catalog\Pricing\Price\TierPrice">
+        <plugin name="callforprice" type="Meetanshi\Callforprice\Plugin\Catalog\Pricing\Price\TierPrice" sortOrder="3"/>
+    </type>
+</config>    

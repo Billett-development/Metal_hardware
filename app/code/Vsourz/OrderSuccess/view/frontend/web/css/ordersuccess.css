@@ -1,0 +1,361 @@
+/*****************************
+ Success page CSS
+*****************************/
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+.page-main .block {
+    margin-bottom: 0px;
+}
+
+.clearfix {
+    content: '';
+    position: relative;
+    display: block;
+    clear: both;
+    float: none;
+}
+
+.order-success .block-content {
+    position: relative;
+    display: block;
+}
+
+.order-success .block-content h3 {
+    font-size: 18px;
+    margin: 0 0 10px 0;
+}
+
+.order-success P {
+    line-height: 1.5em;
+    margin: 0 0 10px 0;
+}
+
+.order-success ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.order-success ul li {
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    list-style-type: none;
+}
+
+.order-success address {
+    line-height: 1.6;
+}
+
+.order-success .a-left {
+    text-align: left;
+}
+
+.order-success .a-center {
+    text-align: center;
+}
+
+.order-success .a-right {
+    text-align: right;
+}
+
+/****
+block-content-header css
+***/
+.block-content-header {
+    text-align: center;
+}
+
+.block-content-header h1 {
+    margin-bottom: 10px;
+    font-size: 30px;
+}
+
+.order-success .block-title {
+    display: block;
+    font-size: 20px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #dfdfdf;
+}
+
+/****
+block-order-informtion css
+***/
+.order-success h1.page-title {
+    margin-bottom: 10px auto;
+}
+
+.ordersuccess-shipping {
+    margin: 0 -10px;
+    padding-bottom: 10px;
+}
+
+.block-order-informtion .ordersuccess-shipping > .block {
+    float: left;
+    width: 50%;
+    padding: 10px;
+    margin: 0;
+}
+
+.block-order-informtion .ordersuccess-shipping .block-content {
+    padding: 10px;
+    border: 1px solid #dfdfdf;
+    border-top: none;
+    min-height: 175px;
+}
+
+.block-content-ordersuccess .block-title {
+    background: #efefef ;
+    color: #000;
+    padding: 12px;
+    font-size: 14px;
+    text-transform:uppercase;
+    margin: 0;
+    border:1px solid #dfdfdf ;
+    border-bottom:none;
+}
+
+.block-left,
+.block-right {
+    width: 50%;
+    float: left;
+}
+
+.block-left .block {
+    width: 50%;
+    float: left;
+    padding: 10px;
+}
+
+.block-right .block {
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.order-success .block-inner {
+    min-height: 150px;
+    padding: 15px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.block-content-header,
+.block-content-cms-top,
+.block-content-cms-bottom,
+.block-content-ordersuccess {
+    margin-bottom: 20px;
+}
+
+.block-content-header .block-inner,
+.block-content-cms-top .block-inner,
+.block-content-cms-bottom .block-inner {
+    min-height: 0;
+}
+
+.block-left .block.block-regstration {
+    width: 100%;
+}
+
+.block-regstration .block-inner {
+    min-height: 0px;
+    text-align: center;
+    padding-top: 20px;
+}
+
+.order-success #registration
+{
+    text-align:center;
+    box-shadow:0 0 10px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow:0 0 10px rgba(0, 0, 0, 0.1);
+    padding:15px;
+}
+.order-success #registration .checkout-success-registration {
+    padding: 0px;
+    border: 0px;
+}
+
+.order-success #registration .block-regstration input.primary.action {
+    width: auto;
+    margin: 10px auto;
+    color: #fff;
+}
+
+.order-success .block-regstration .action.primary:hover{
+}
+
+.order-success .checkout-success-registration {
+    padding:30px;
+    border: 0px;
+}
+
+/***
+ordersuccess-product-table css
+***/
+.ordersuccess-product-table {
+    width: 100%;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    border: 1px solid #dfdfdf;
+}
+
+.ordersuccess-product-table .image-wrapper {
+    float: left;
+    padding: 0 10px 0 0;
+}
+
+.ordersuccess-product-table .product-item-details {
+    overflow: hidden;
+}
+
+.ordersuccess-product-table .item-options {
+    margin: 0;
+}
+
+.ordersuccess-product-table .product-item-name {
+    font-size: 16px;
+    margin:25px 0px 0px 0px;
+    padding: 0;
+}
+
+
+.ordersuccess-product-table tbody tr {
+    border-bottom: 1px solid #dfdfdf;
+}
+
+.ordersuccess-product-table thead th {
+    font-size: 14px;
+}
+
+.ordersuccess-product-table thead th,
+.ordersuccess-product-table tbody td {
+    padding:12px;
+    vertical-align: middle;
+    font-size: 14px;
+}
+
+.ordersuccess-product-table tfoot,
+.ordersuccess-product-table thead {
+    color: #000000;
+    background-color:#efefef;
+}
+
+.ordersuccess-product-table .price {
+    font-size: 14px;
+}
+
+.ordersuccess-product-table tfoot .amount {
+    font-weight: bold;
+}
+
+.ordersuccess-product-table tfoot .grand_total {
+    border-top:1px solid #dfdfdf;
+}
+
+@media screen and (max-width:1000px) {
+    .ordersuccess-product-table .image-wrapper img {
+        max-width: 70px;
+    }
+
+}
+
+@media screen and (max-width:767px) {
+    .order-success {
+        font-size: 13px;
+    }
+
+    .ordersuccess-product-table .product-item-name {
+        font-size: 14px;
+    }
+
+}
+
+@media screen and (max-width:650px) {
+    .ordersuccess-product-table thead {
+        display: none;
+    }
+
+    .ordersuccess-product-table tbody td {
+        display: block;
+        float: left;
+        width: 100%;
+        box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+    }
+
+    .ordersuccess-product-table tbody td::before {
+        float: left;
+        font-weight: bold;
+        margin-top:2px;
+    }
+
+    .ordersuccess-product-table tbody td {
+        text-align: right;
+    }
+
+    .ordersuccess-product-table tbody td.product-sku::before {
+        content: "Sku :";
+    }
+
+    .ordersuccess-product-table tbody td.unit-price::before {
+        content: "Unit Price :";
+    }
+
+    .ordersuccess-product-table tbody td.product-qty::before {
+        content: "Qty :";
+    }
+
+    .ordersuccess-product-table tbody td.product-subtotal::before {
+        content: "Subtotal :";
+    }
+
+    .ordersuccess-product-table tfoot tr th,
+    .ordersuccess-product-table tfoot tr td {
+        display: block;
+        float: left;
+        width: 30%;
+    }
+
+    .ordersuccess-product-table tfoot tr th {
+        width: 70%;
+    }
+
+.ordersuccess-product-table .product-item-name {
+    margin:10px 0px 0px 0px;
+}
+
+.block-ordersuccess-product-table {
+    border-radius:0px;
+    overflow: hidden;
+}
+
+.ordersuccess-product-table thead th, .ordersuccess-product-table tbody td {
+    padding:2px 12px;
+    vertical-align: middle;
+}
+
+    .order-success .ordersuccess-product-table .a-center {
+        text-align: right;
+    }
+
+    .block-order-informtion .ordersuccess-shipping > .block {
+        float: none;
+        width: 100%;
+        padding: 0 0 15px 0;
+    }
+
+    .block-order-informtion .ordersuccess-shipping .block-content {
+        min-height: 100px;
+    }
+
+    .ordersuccess-shipping {
+        margin: 0;
+        padding-bottom: 0;
+    }
+
+}

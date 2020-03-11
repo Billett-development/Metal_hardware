@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <title>Edit Image</title>
+    </head>
+    <body>
+        <referenceBlock name="menu">
+            <action method="setActive">
+                <argument name="itemId" xsi:type="string">Vsourz_Imagegallery::imageimage</argument>
+            </action>
+        </referenceBlock>
+        <referenceContainer name="content">
+        <block class="Vsourz\Imagegallery\Block\Adminhtml\Image\Edit" name="image_edit"/>
+        </referenceContainer>
+        <referenceContainer name="left">
+        <block class="Vsourz\Imagegallery\Block\Adminhtml\Image\Edit\Tabs" name="image_edit_tabs">
+            <block class="Vsourz\Imagegallery\Block\Adminhtml\Image\Edit\Tab\Form" name="image_edit_tab_form"/>
+                
+        	<action method="addTab">
+                <argument name="name" xsi:type="string">main_section</argument>
+                <argument name="block" xsi:type="string">image_edit_tab_form</argument>
+            </action>
+             <!-- This code is added for Categories grid -->
+            <action method="addTab">
+                <argument name="name" xsi:type="string">image_categorys</argument>
+                <argument name="block" xsi:type="array">
+                    <item name="label" xsi:type="string">Select Categories</item>
+                    <item name="title" xsi:type="string">Select Categories</item>
+                    <item name="url" xsi:type="helper" helper="Vsourz\Imagegallery\Helper\Data::getImageGallerysGridUrl"></item>
+                    <item name="class" xsi:type="string">ajax</item>
+                </argument>
+            </action>
+            <!-- This code is added for Categories grid -->   
+        </block>
+        </referenceContainer>
+    </body>
+</page>

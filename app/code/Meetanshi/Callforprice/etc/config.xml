@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Magento/Core/etc/config.xsd">
+    <default>
+        <callforprice>
+            <general>
+                <active>0</active>
+                <displayed_text>Call For Price</displayed_text>
+                <privacy_text>I Accept Privacy Policy</privacy_text>
+                <allow_customer_group>0</allow_customer_group>
+                <allow_categories>0</allow_categories>
+            </general>
+            <adminemail>
+                <emailtemplate>callforprice_adminemail_emailtemplate</emailtemplate>
+            </adminemail>
+            <customeremail>
+                <emailtemplate>callforprice_customeremail_emailtemplate</emailtemplate>
+            </customeremail>
+        </callforprice>
+    </default>
+</config>

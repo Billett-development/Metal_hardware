@@ -1,0 +1,79 @@
+<?php
+
+namespace Ibnab\CategoriesUrl\Plugin;
+use Magento\Catalog\Model\Category as ModelCategory;
+class ChangeUrl
+{
+    /**
+     * Category factory
+     *
+     * @var \Magento\Catalog\Model\CategoryFactory
+     */
+    protected $_categoryFactory;
+    /**
+     * @var \Magento\Cms\Model\Template\FilterProvider
+     */
+    protected $_filterProvider;
+    /**
+     * @var \Ibnab\CategoriesUrl\Helper\Data
+     */
+    protected $dataHelper;
+    /**
+     * Store manager
+     *
+     * @var \Magento\Store\Model\StoreManagerInterface
+     */
+    protected $_storeManager;
+
+    public function __construct(
+        \Magento\Catalog\Model\CategoryFactory $categoryFactory,
+        \Magento\Cms\Model\Template\FilterProvider $filterProvider,
+        \Ibnab\CategoriesUrl\Helper\Data $dataHelper,
+        \Magento\Store\Model\StoreManagerInterface $storeManager
+    ) {
+        $this->_categoryFactory = $categoryFactory;
+        $this->_filterProvider = $filterProvider;
+        $this->dataHelper = $dataHelper;
+        $this->_storeManager = $storeManager;
+    }
+    public function aroundGetCategoryUrl($categoryHelper,$getCategoryUrl,$category)
+    {
+
+        $itemUrl = '#';
+        if ($category instanceof ModelCategory) {
+            $itemUrl = $category->getUrl();
+        }
+        else
+        {
+           $category = $this->_categoryFactory->create()->setData($category->getData());
+           $itemUrl  = $category->getUrl();
+        }
+        if($this->dataHelper->allowExtension())
+        {
+        if ($category->getOtherU()) {
+
+          if ($category->getOtherUvalue() == '/') {
+             $itemUrl = $this->_storeManager->getStore()->getBaseUrl();
+          } 
+          elseif ($category->getOtherUvalue() == '#') {
+             $itemUrl = '#';
+          } 
+          elseif (strpos($category->getOtherUvalue(), "{{store") !== false) {
+            $storeId = $this->_storeManager->getStore()->getId();
+            $itemUrl = $this->_filterProvider->getBlockFilter()->setStoreId($storeId)->filter($category->getOtherUvalue());
+          } 
+          else $itemUrl = $category->getOtherUvalue();
+        }
+        }
+        return $itemUrl;
+    }
+    public function beforeLoad($collection,$printQuery = false, $logQuery = false)
+    {
+        if(!$this->dataHelper->allowExtension())
+        {
+        $collection->addAttributeToSelect('other_u');
+        $collection->addAttributeToSelect('other_uvalue');
+        }
+    }
+
+}

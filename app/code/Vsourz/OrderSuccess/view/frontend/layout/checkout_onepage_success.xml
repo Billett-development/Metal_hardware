@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <title>Success Page</title>
+        <css src="Vsourz_OrderSuccess::css/ordersuccess.css"/>
+    </head>
+    <body>
+        <referenceBlock name="page.main.title" remove="true" />
+    	<referenceContainer name="content" >
+        	<block name="checkout.order.success"  class="Vsourz\OrderSuccess\Block\Success" template="Vsourz_OrderSuccess::success.phtml" ifconfig="ordersuccess/general/ordersuccess_enable" cacheable="false">
+                <block class="Magento\Checkout\Block\Registration" name="checkout.order.registration" template="registration.phtml" cacheable="false"/>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

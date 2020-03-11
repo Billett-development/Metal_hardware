@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+  /**
+ * Created by Q-Solutions Studio
+ * Date: 19.07.19
+ *
+ * @category    DataFeedWatch
+ * @package     DataFeedWatch_Connector
+ * @author      Maciej Buchert <maciej@qsolutionsstudio.com>
+ */
+-->
+<integrations>
+    <integration name="dfwIntegration">
+        <email>magento@datafeedwatch.com</email>
+    </integration>
+</integrations>

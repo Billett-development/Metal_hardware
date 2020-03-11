@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+	<default>
+	    <ordercomment>
+	        <general>
+	            <enabled>1</enabled>
+	        </general>
+	    </ordercomment>
+		 <ordercomment>
+	        <general>
+	            <order_comments>1</order_comments>
+	        </general>
+	    </ordercomment>
+		<ordercomment>
+	        <general>
+	            <order_file_upload>1</order_file_upload>
+	        </general>
+	    </ordercomment>
+		<ordercomment>
+	        <general>
+	            <order_comment_title>Additional Information</order_comment_title>
+	        </general>
+	    </ordercomment>
+		<ordercomment>
+	        <general>
+	            <order_comment_text_title>Order Comments</order_comment_text_title>
+	        </general>
+	    </ordercomment>
+		<ordercomment>
+	        <general>
+	            <order_comment_file_title>Order Attachment</order_comment_file_title>
+	        </general>
+	    </ordercomment>
+		<ordercomment>
+	        <general>
+	            <order_comments_field_required>0</order_comments_field_required>
+	        </general>
+	    </ordercomment>
+		<ordercomment>
+	        <general>
+	            <order_comments_file_required>0</order_comments_file_required>
+	        </general>
+	    </ordercomment>
+	    <ordercomment>
+	        <general>
+	            <order_comments_file_type>jpg,png,gif,txt,psd,doc</order_comments_file_type>
+	        </general>
+	    </ordercomment>
+	</default>
+</config>

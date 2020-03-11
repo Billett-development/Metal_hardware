@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+	<default>
+	    <imagegallery>
+	        <general>
+	            <enabled>1</enabled>
+	        </general>
+	    </imagegallery>
+		<imagegallery>
+	        <general>
+	            <enabled_category_title>1</enabled_category_title>
+	        </general>
+	    </imagegallery>
+		<imagegallery>
+	        <general>
+	            <enabled_category_desc>1</enabled_category_desc>
+	        </general>
+	    </imagegallery>
+		<imagegallery>
+	        <general>
+	            <enabled_image_title>1</enabled_image_title>
+	        </general>
+	    </imagegallery>
+		<imagegallery>
+	        <general>
+	            <enabled_image_description>1</enabled_image_description>
+	        </general>
+	    </imagegallery>
+		<!--<imagegallery>
+	        <general>
+	            <enabled_image_link_header>1</enabled_image_link_header>
+	        </general>
+	    </imagegallery> 
+		<imagegallery>
+	        <general>
+	            <enabled_image_link_footer>1</enabled_image_link_footer>
+	        </general>
+	    </imagegallery>
+		<imagegallery>
+	        <general>
+	            <enabled_image_link_topnav>1</enabled_image_link_topnav>
+	        </general>
+	    </imagegallery>-->
+	</default>
+</config>

@@ -1,0 +1,130 @@
+.customer-welcome .customer-menu{
+    display: block;
+    position: static;
+    padding:0;
+    border:none;
+    min-width: auto;
+
+}
+.header.links li.customer-welcome span.customer-name{
+    display: none;
+}
+.alo-toggle .toggle-content:before{
+    background: #fff;
+}
+.header.links{
+    background: #fff;
+}
+.modal-popup.popup-authentication .block-authentication{
+    border: none;
+}
+.block-authentication .block[class] ul{
+    padding-inline-start: 0;
+}
+.popup-authentication .fieldset.login{
+    margin: 0;
+    padding: 0;
+}
+.modal-popup.popup-authentication .actions-toolbar{
+    padding-top:15px;
+}
+.popup-authentication .block-authentication .action.action-login{
+    padding: 0 20px;
+}
+.modal-popup.popup-authentication .modal-inner-wrap{
+    height: auto !important;
+}
+.modal-popup.popup-authentication .modal-content{
+    padding-bottom: 60px;
+}
+.modal-popup.popup-authentication .block-authentication{
+    display: flex;
+    flex-wrap: wrap;
+}
+.modal-popup.popup-authentication .block-new-customer{
+    order: 2;
+}
+.modal-popup.popup-authentication .block-customer-login{
+    order: 1;
+}
+.block-authentication .actions-toolbar>.secondary{
+    text-align: start;
+}
+.popup-newsletter.modal-popup.modal-slide .modal-inner-wrap{
+    height:auto !important;
+}
+/*RESPONSIVE*/
+@media(min-width:768px){
+    .modal-popup.popup-authentication .block[class]{
+        padding: 0;
+        padding-top: 10px;
+        padding-inline-start: 30px;
+    }
+    .modal-popup.popup-authentication .block[class]+.block{
+        padding-inline-start: 0;
+        padding-inline-end: 30px;
+        border: none;
+        border-inline-end: 1px solid #c1c1c1;      
+    }
+    .modal-popup.popup-authentication .block[class]+.block:before{
+        margin: 0;
+        margin-top: -19px;
+        margin-inline-end: -18px;
+        left:auto;
+        right:0;
+    }
+    .popup-authentication .block-authentication .block .actions-toolbar{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    .popup-authentication .block-authentication .block .actions-toolbar:before,
+    .popup-authentication .block-authentication .block .actions-toolbar:after{
+        display: none;
+    }
+    .popup-authentication .block-authentication .block-new-customer .actions-toolbar >.primary{
+        float:none;
+        display: block;
+        width: 100%;
+    }
+    .popup-authentication .block-authentication .block-new-customer .actions-toolbar >.primary .action{
+        width: 100%;
+        display: block;
+    }
+}
+@media(max-width:768px){
+    .modal-popup.popup-authentication .modal-inner-wrap{
+        background: #fff !important;
+    }    
+}
+@media(max-width:767px){
+    .modal-popup.popup-authentication {
+        left:0;
+    }
+    .modal-popup.popup-authentication .modal-inner-wrap{
+        width:100% !important;
+    }
+    .popup-authentication .block-authentication .block[class]+.block{
+        padding-top: 0;
+        border: none;
+    }
+    .popup-authentication  .block-authentication .block[class]+.block::before{
+        display: none;
+    }
+    .modal-popup.popup-authentication .block[class]{
+        width: 100%;
+    }
+    .modal-popup.popup-authentication .block-new-customer{
+        margin-top: 40px;
+    }
+    .modal-popup.popup-authentication .block-customer-login{
+        margin-top: 0 !important;
+    }
+}
+/*RTL*/
+@media(min-width:768px){
+    .rtl .modal-popup.popup-authentication .block[class]+.block:before{
+       left:0;
+       right:auto;
+    }
+}

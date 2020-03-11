@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <ordersuccess>
+            <general>
+                <ordersuccess_enable>1</ordersuccess_enable>
+            </general>
+             <ordersuccess_address_section>
+                <ordersuccess_address_billing>1</ordersuccess_address_billing>
+                <ordersuccess_address_shipping>1</ordersuccess_address_shipping>
+                <ordersuccess_address_shipping_method>1</ordersuccess_address_shipping_method>
+                <ordersuccess_address_payment_method>1</ordersuccess_address_payment_method>
+                <regstration_enable>1</regstration_enable>
+            </ordersuccess_address_section>
+            <ordersuccess_order_section>
+                <ordersuccess_product_table>1</ordersuccess_product_table>
+                <ordersuccess_product_images>1</ordersuccess_product_images>
+                <ordersuccess_discount>1</ordersuccess_discount>
+                <ordersuccess_shipping_rate>1</ordersuccess_shipping_rate>
+                <ordersuccess_tax>1</ordersuccess_tax>
+            </ordersuccess_order_section>
+            <ordersuccess_cms_section>
+                <ordersuccess_enable_cms_top>1</ordersuccess_enable_cms_top>
+                <ordersuccess_cms_top_id></ordersuccess_cms_top_id>
+                <ordersuccess_enable_cms_bottom>1</ordersuccess_enable_cms_bottom>
+                <ordersuccess_cms_bottom_id></ordersuccess_cms_bottom_id>
+            </ordersuccess_cms_section>
+        </ordersuccess>
+    </default>
+</config>

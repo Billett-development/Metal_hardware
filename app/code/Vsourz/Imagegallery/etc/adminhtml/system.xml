@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="vsourz" translate="label" sortOrder="700">
+            <label>Vsourz</label>
+        </tab>
+        <section id="imagegallery" translate="label" type="text" sortOrder="600" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+            <class>separator-top</class>
+            <label>Image Gallery</label>
+            <tab>vsourz</tab>
+            <resource>Vsourz_Imagegallery::config_imagegallery</resource>
+            <group id="general" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                <label>General Settings</label>
+                <field id="enabled" translate="label comment" type="select" sortOrder="10"  showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enable Extension</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+				
+				<field id="enabled_category_title" translate="label comment" type="select" sortOrder="20"  showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Display Category Title</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>If select yes then display category title for all category</comment>
+                </field>
+				
+				<field id="enabled_category_desc" translate="label comment" type="select" sortOrder="30"  showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Display Category Description</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>If select yes then display category description for all category</comment>
+                </field>
+				
+				<field id="enabled_image_title" translate="label comment" type="select" sortOrder="40"  showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Display Image Title</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>If select yes then display image title for all images</comment>
+                </field>
+				
+				<field id="enabled_image_description" translate="label comment" type="select" sortOrder="50"  showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Display Image Description</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>If select yes then display image description for all images</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

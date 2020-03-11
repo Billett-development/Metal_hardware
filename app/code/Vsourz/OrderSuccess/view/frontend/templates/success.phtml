@@ -1,0 +1,373 @@
+<?php
+/**
+*Copyright © 2015 Magento. All rights reserved.
+*See COPYING.txt for license details.
+*/
+// @codingStandardsIgnoreFile
+?>
+
+<?php
+$objectManager = $block->getObjectManager();
+$sc = $objectManager->get('\Magento\Framework\App\Config\ScopeConfigInterface');
+$CheckoutHelper = $this->helper('Magento\Checkout\Helper\Data');
+$TaxHelper = $this->helper('Magento\Tax\Helper\Data');
+$ordersuccess_address_billing = $sc->getValue('ordersuccess/ordersuccess_address_section/ordersuccess_address_billing',Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+$ordersuccess_address_shipping = $sc->getValue('ordersuccess/ordersuccess_address_section/ordersuccess_address_shipping',Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+$ordersuccess_address_shipping_method = $sc->getValue('ordersuccess/ordersuccess_address_section/ordersuccess_address_shipping_method',Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+$ordersuccess_address_payment_method = $sc->getValue('ordersuccess/ordersuccess_address_section/ordersuccess_address_payment_method',Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+$regstration_enable = $sc->getValue('ordersuccess/ordersuccess_address_section/regstration_enable',Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+$ordersuccess_product_table = $sc->getValue('ordersuccess/ordersuccess_order_section/ordersuccess_product_table',Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+$ordersuccess_product_images = $sc->getValue('ordersuccess/ordersuccess_order_section/ordersuccess_product_images',Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+$ordersuccess_discount = $sc->getValue('ordersuccess/ordersuccess_order_section/ordersuccess_discount',Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+$ordersuccess_shipping_rate = $sc->getValue('ordersuccess/ordersuccess_order_section/ordersuccess_shipping_rate',Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+$ordersuccess_tax = $sc->getValue('ordersuccess/ordersuccess_order_section/ordersuccess_tax',Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+
+$cms_top_enable = $sc->getValue('ordersuccess/ordersuccess_cms_section/ordersuccess_enable_cms_top',Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+$cms_bottom_enable = $sc->getValue('ordersuccess/ordersuccess_cms_section/ordersuccess_enable_cms_bottom',Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+$cms_top_id = $sc->getValue('ordersuccess/ordersuccess_cms_section/ordersuccess_cms_top_id',Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+$cms_bottom_id = $sc->getValue('ordersuccess/ordersuccess_cms_section/ordersuccess_cms_bottom_id',Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+
+/* Render Top CMS Block */
+$filter = $objectManager->get('\Magento\Cms\Model\Template\FilterProvider');
+try {
+    $orderid = $block->getOrderId();
+    $_order = $block->getOrder();
+    $model = $objectManager->get('\Magento\Sales\Model\Order');
+    $store = $objectManager->get('Magento\Store\Model\StoreManagerInterface');
+    $currency = $objectManager->get('Magento\Framework\Locale\CurrencyInterface');
+    $country = $objectManager->get('Magento\Directory\Model\Country');
+    $currencyCode = $store->getStore()->getBaseCurrencyCode();
+    $symbol = $currency->getCurrency($currencyCode)->getSymbol();
+    $product = $objectManager->get('\Magento\Catalog\Model\Product');
+    $_customproduct = $product->load($product->getId());
+    $media = $objectManager->get('\Magento\Catalog\Model\Product\Media\Config');
+    $image = $objectManager->get('Magento\Catalog\Helper\Image');
+
+    $order = $model->loadByIncrementId($orderid);
+    $ship_address = $order->getShippingAddress();
+    $bill_address = $order->getBillingAddress() ;
+    $orderItems = $order->getAllVisibleItems();
+    $cms = $objectManager->get('Magento\Cms\Model\BlockFactory');
+} catch (Exception $e) {
+
+}
+?>
+
+<div class="order-success">
+    <div class="block-content block-content-header clearfix">
+        <div class="block-inner">
+            <h1 class="page-title"><?php echo __('Thank You') ?></h1>
+            <?php if ($block->getOrderId()):?>
+                <?php if ($block->getCanViewOrder()) :?>
+                    <p><?php echo __('Your order number is: %1', sprintf('<a href="%s" class="order-number"><strong>%s</strong></a>',
+                    $block->escapeHtml($block->getViewOrderUrl()),
+                    $block->escapeHtml($block->getOrderId()))) ?></p>
+                <?php  else :?>
+                    <p><?php echo __('Your order # is: <span>%1</span>', $block->escapeHtml($block->getOrderId())) ?></p>
+                <?php endif;?>
+                    <p><?php /* @escapeNotVerified */ echo __('We\'ll email you an order confirmation with details and tracking info.') ?></p>
+            <?php endif;?>
+        </div>
+    </div>
+
+    <?php if($cms_top_enable) :?>
+    <?php $cms_top = $cms->create()->load($cms_top_id); ?>
+        <?php if ($cms_top->isActive() && trim($cms_top->getTitle()) != '') : ?>
+            <div class="block-content block-content-cms-top clearfix">
+                <div class="block-inner">
+                    <?php echo $filter->getBlockFilter()->filter($cms_top->getContent()); ?>
+                </div>
+            </div>
+        <?php endif ?>
+    <?php endif;?>
+
+    <div class="block-content block-content-ordersuccess clearfix">
+        <div class="block-inner">
+            <div class="block-order-informtion" <?php echo (!$ordersuccess_product_table)? 'style="width:100%;"' : '' ?> >
+            <div class="ordersuccess-shipping clearfix">
+                <?php if($ordersuccess_address_shipping) :?>
+                    <div class="block block-shipping-address">
+                        <div class="block-title"><?php echo __('Shipping Address') ?></div>
+                        <div class="block-content">
+                                <?php if($ship_address) :?>
+                                <address>
+                                    <ul><?php echo $block->getPrimaryShippingAddressHtml() ?>
+                                        <li><?php echo $ship_address['firstname'] . " ". $ship_address['lastname']; ?></li>
+                                        <li><?php echo $ship_address['street']; ?></li>
+                                        <li><?php echo $ship_address['city']; ?></li>
+                                        <li><?php echo $ship_address['postcode'];?></li>
+                                        <li><?php echo $ship_address['region'];?></li>
+                                        <li><?php if($ship_address['country_id'] != null) :?></li>
+                                        <li><?php echo $country->loadByCode($ship_address['country_id'])->getName();?></li>
+                                        <?php endif; ?>
+                                        <li><?php  echo $ship_address['telephone'];?></li>
+                                    </ul>
+                                </address>
+                                <?php endif; ?>
+                            </div>
+                    </div>
+                <?php endif ?>
+                <?php if($ordersuccess_address_billing) :?>
+                    <div class="block block-billing-address">
+                            <div class="block-title"><?php echo __('Billing Address') ?></div>
+                            <div class="block-content">
+                            <?php if($bill_address) :?>
+                            <address>
+                                <ul><?php echo $block->getBilllingAddress() ?>
+                                    <li><?php echo $bill_address['firstname'] . " ". $bill_address['lastname']; ?></li>
+                                    <li><?php echo $bill_address['street']; ?></li>
+                                    <li><?php echo $bill_address['city']; ?></li>
+                                    <li><?php echo $bill_address['postcode'];?></li>
+                                    <li><?php echo $bill_address['region'];?></li>
+                                    <li><?php if($bill_address['country_id'] != null) :?>
+                                        <li><?php echo $country->loadByCode($bill_address['country_id'])->getName();?></li>
+                                        <?php endif; ?>
+                                        <li><?php  echo $bill_address['telephone'];?></li>
+                                    </li>
+                                </ul>
+                            </address>
+                            <?php endif; ?>
+                            </div>
+                    </div>
+                <?php endif ?>
+
+                <?php if($ordersuccess_address_shipping_method) :?>
+                    <div class="block block-shipping-method">
+                            <div class="block-title"><?php echo __('Shipping Method') ?></div>
+                            <div class="block-content">
+                                <?php if ($order->getShippingDescription()): ?>
+                                <?php echo $order->getShippingDescription(); ?>
+                                <?php else: ?>
+                                <?php echo __('No shipping information available'); ?>
+                                <?php endif; ?>
+                            </div>
+                    </div>
+                <?php endif ?>
+
+                <?php if($ordersuccess_address_payment_method) :?>
+                    <div class="block block-payment-method">
+                            <div class="block-title"><?php echo __('Payment Method') ?></div>
+                            <div class="block-content">
+                                <?php echo $order->getPayment()->getMethodInstance()->getTitle() ?>
+                            </div>
+                    </div>
+                <?php endif ?>
+            </div>
+        </div>
+
+        <?php if($ordersuccess_product_table) :?>
+            <div class="block-order-table">
+                <div class="block block-ordersuccess-product-table">
+                        <table class="ordersuccess-product-table" id="success-order-table">
+                            <thead>
+                                <th class="col a-left product-name"><?php echo __('Product Name')?></th>
+                                <th class="col a-center unit-price"><?php echo __('Unit Price')?></th>
+                                <th class="col a-center product-qty"><?php echo __('Qty')?></th>
+                                <th class="col a-right product-subtotal last"><?php echo __('Subtotal')?></th>
+                            </thead>
+
+                            <tbody class="item">
+                                <?php foreach($orderItems as $items): ?>
+                                <?php if($items->getProduct()->getTypeId() != "virtual"): ?>
+                                <tr>
+
+                                    <td class="col a-left product-name">
+                                        <?php if($ordersuccess_product_images) :?>
+                                        <div class="image-wrapper">
+                                            <?php $i = $this->helper('Magento\Catalog\Helper\Image')->init($items->getProduct(), 'cart_page_product_thumbnail'); ?>
+                                            <img class="image"  src="<?php echo $i->getUrl(); ?>" alt="<?php echo $items->getName();?>" height="100" width="100"/>
+                                        </div>
+                                        <?php endif ?>
+
+                                        <div class="product-item-details">
+                                            <strong class="product-item-name"><?php echo $items->getName();?>  </strong>
+                                            <?php
+                                            if(isset($items->getProductOptions()["attributes_info"]) && is_array($items->getProductOptions()["attributes_info"])) {
+                                            echo '<dl class="item-options">';
+                                                    foreach ($items->getProductOptions()["attributes_info"] as $key => $value) {
+                                                    echo '<dt><span class="lab">'.$value['label'].'</span> : <span class="val">'.$value['value'].'</span></dt>';
+                                                    }
+                                            echo '</dl>';
+                                            }
+
+                                            $options = $items->getProductOptions();                                             
+                                            if (isset($options['options']) && !empty($options['options'])) {   
+                                             echo '<dl class="item-options">';     
+									        foreach ($options['options'] as $option) {
+									        	 echo '<dt><span class="lab">'.$option['label'].'</span> : <span class="val">'.$option['value'].'</span></dt>';					            
+									        }
+									         echo '</dl>';
+                                           }
+                                            ?>
+                                       </div>
+                                    </td>
+
+                                    <td class="col a-center unit-price" data-th="Unit Price">
+                                        <span class="price-excluding-tax">
+                                            <span class="cart-price">
+                                                <span class="price">
+                                                     <?php
+                                                     if($TaxHelper->displaySalesPriceInclTax() == "1"){
+                                                        $unitprice = $CheckoutHelper->formatPrice($items->getPriceInclTax());
+                                                        echo $unitprice;
+                                                     }
+                                                     elseif ($TaxHelper->displaySalesBothPrices() == "1") {
+                                                        $unitprice = $CheckoutHelper->formatPrice($items->getPriceInclTax());
+                                                        echo $unitprice."</br>";
+                                                        $unitpriceExcl = $CheckoutHelper->formatPrice($items->getPrice());
+                                                        echo "Excl Tax:".$unitpriceExcl;
+                                                     }
+                                                     else
+                                                     {
+                                                        $unitprice = $CheckoutHelper->formatPrice($items->getPrice());
+                                                        echo $unitprice;
+                                                     }
+                                                      ?>
+                                                </span>
+                                            </span>
+                                        </span>
+                                    </td>
+
+                                    <td class="col a-center product-qty" data-th="Qty">
+                                        <div class="qty"><strong><?php echo number_format($items->getQtyOrdered(),0); ?></strong></div>
+                                    </td>
+
+                                    <td class="col a-right product-subtotal last" data-th="Subtotal">
+                                        <span class="price-excluding-tax">
+                                           <span class="cart-price">
+                                                <span class="price">
+                                                    <?php
+                                                     if($TaxHelper->displaySalesSubtotalInclTax() == "1"){
+                                                        $qty_sub = $CheckoutHelper->formatPrice($items->getRowTotalInclTax());
+                                                        echo $qty_sub;
+                                                     }
+                                                     elseif ($TaxHelper->displaySalesSubtotalBoth() == "1") {
+                                                        $qty_sub = $CheckoutHelper->formatPrice($items->getRowTotalInclTax());
+                                                        echo $qty_sub."</br>";
+                                                        $qty_subExcl = $CheckoutHelper->formatPrice($items->getRowTotal());
+                                                        echo "Excl Tax:".$qty_subExcl;
+                                                     }
+                                                     else
+                                                     {
+                                                        $qty_sub = $CheckoutHelper->formatPrice($items->getRowTotal());
+                                                        echo $qty_sub;
+                                                     }
+                                                      ?>
+                                                </span>
+                                            </span>
+                                       </span>
+                                    </td>
+                                </tr>
+                                <?php endif;?>
+                                <?php endforeach; ?>
+                            </tbody>
+                            <tfoot>
+
+                                <tr class="subtotal">
+                                    <th class="mark a-right" colspan="3"><?php echo __('Subtotal')?></th>
+                                    <td class="amount a-right" data-th="Subtotal">
+                                    <?php
+                                    if($TaxHelper->displaySalesSubtotalInclTax() == "1"){
+                                    $FinalSubtotal = $CheckoutHelper->formatPrice($order->getSubtotalInclTax());
+                                    echo $FinalSubtotal;
+                                    }
+                                    elseif ($TaxHelper->displaySalesSubtotalBoth() == "1") {
+                                    $FinalSubtotal = $CheckoutHelper->formatPrice($order->getSubtotalInclTax());
+                                    echo $FinalSubtotal."</br>";
+                                    $FinalSubtotalExcl = $CheckoutHelper->formatPrice($order->getSubtotal());
+                                    echo "Excl Tax:".$FinalSubtotalExcl;
+                                    }                                                
+                                    else
+                                    {
+                                    $FinalSubtotal = $CheckoutHelper->formatPrice($order->getSubtotal());
+                                    echo $FinalSubtotal;
+                                    }
+                                    ?>
+
+                                </td>
+                                </tr>
+
+                                <?php
+                                if($ordersuccess_discount && $order->getDiscountAmount() < 0) :?>
+                                <tr class="discount">
+                                    <th class="mark a-right" colspan="3">
+                                        <?php echo __('Discount')?>
+                                    <?php echo ($order->getDiscountDescription() != null ) ? "(".$order->getDiscountDescription().")" : null ; ?></th>
+
+                                    <td class="amount a-right" data-th="Discount">
+                                        <div class="amount">
+                                        <?php $discountPrice = $CheckoutHelper->formatPrice($order->getDiscountAmount());
+                                        echo $discountPrice ;
+                                        ?>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <?php endif;?>
+
+                                <?php if($ordersuccess_shipping_rate && $order->getShippingAmount() > 0) :?>
+                                <tr class="shipping">
+                                    <th class="mark a-right" colspan="3"><?php echo __('Shipping & Handling ')?></th>
+                                    <td class="amount a-right" data-th="Shipping & Handling">
+                                    <?php 
+                                    if($TaxHelper->displayShippingPriceIncludingTax() == "1"){
+                                    $ShippingAmount = $CheckoutHelper->formatPrice($order->getShippingInclTax());
+                                    echo $ShippingAmount;
+                                    }
+                                    elseif ($TaxHelper->displayShippingBothPrices() == "1") {
+                                    $ShippingAmount = $CheckoutHelper->formatPrice($order->getShippingInclTax());
+                                    echo $ShippingAmount."</br>";
+                                    $ShippingAmountExcl = $CheckoutHelper->formatPrice($order->getShippingAmount());
+                                    echo "Excl Tax:".$ShippingAmountExcl;
+                                    }                                                
+                                    else
+                                    {
+                                    $ShippingAmount = $CheckoutHelper->formatPrice($order->getShippingAmount());
+                                    echo $ShippingAmount;
+                                    }
+                                    ?>
+                                    </td>
+                                </tr>
+                                <?php endif;?>
+
+                                <?php if($ordersuccess_tax && $order->getTaxAmount() > 0) :?>
+                                <tr class="tax">
+                                    <th class="mark a-right" colspan="3"><?php echo __('Tax')?></th>
+                                    <td class="amount a-right" data-th="Tax">
+                                    <?php $TaxAmount =  $CheckoutHelper->formatPrice($order->getTaxAmount());
+                                    echo $TaxAmount;?></td>
+                                </tr>
+                                <?php endif;?>
+
+                                <tr class="grand_total">
+                                    <th class="mark a-right" colspan="3"><?php echo __('Grand Total')?></th>
+                                    <?php
+                                    //$FinalGrandTotal = $order->getSubtotalInclTax() + $order->getTaxAmount() + $order->getShippingAmount() + $order->getGiftwrapperTotal(); ?>
+                                    <td class="amount a-right" data-th="Grand Total">
+                                    <?php $OrderGrandTotal = $CheckoutHelper->formatPrice($order->getGrandTotal());
+                                     echo $OrderGrandTotal;?></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+            </div>
+        <?php endif;?>
+        </div>
+        </div>
+
+    <?php if($cms_bottom_enable) :?>
+    <?php $cms_bottom = $cms->create()->load($cms_bottom_id); ?>
+        <?php if ($cms_bottom->isActive() && trim($cms_bottom->getTitle()) != '') : ?>
+            <div class="block-content block-content-cms-bottom clearfix">
+                <div class="block-inner">
+                    <?php echo $filter->getBlockFilter()->filter($cms_bottom->getContent()); ?>
+                </div>
+            </div>
+        <?php endif ?>
+    <?php endif;?>
+
+    <?php if($regstration_enable) :?>
+                <?php
+                    echo $this->getlayout()->renderElement('checkout.order.registration');
+                 ?>
+    <?php endif ?>
+</div>

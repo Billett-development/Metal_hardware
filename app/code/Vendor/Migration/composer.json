@@ -1,0 +1,21 @@
+{
+    "name": "vendor/migration",
+    "description": "Providing config for migration",
+    "config": {
+        "sort-packages": true
+    },
+    "require": {
+        "magento/framework": "*",
+        "magento/data-migration-tool": "*"
+    },
+    "type": "magento2-module",
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Vendor\\Migration\\": ""
+        }
+    },
+    "version": "1.0.0"
+}

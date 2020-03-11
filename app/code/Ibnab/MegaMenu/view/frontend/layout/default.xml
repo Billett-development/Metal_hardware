@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<page layout="3columns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+
+        <referenceBlock name='catalog.topnav'>
+         <action method='setTemplate'>
+            <argument name='template' xsi:type='string'>Ibnab_MegaMenu::html/top-mega.phtml</argument>
+         </action>
+        </referenceBlock>
+    </body>
+</page>

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <fieldset name="mega">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Mega Menu</item>
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="sortOrder" xsi:type="number">2</item>
+            </item>
+        </argument>
+        <field name="use_label">
+            <argument name="data" xsi:type="array">
+            <item name="options" xsi:type="object">Magento\Config\Model\Config\Source\Yesno</item>
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">8</item>
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="label" xsi:type="string" translate="true">Use Label </item>
+                </item>
+            </argument>
+        </field> 
+        <field name="label_value">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">9</item>
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="label" xsi:type="string" translate="true">Label</item>                    
+                </item>
+            </argument>
+        </field> 
+        <field name="use_static_block">
+            <argument name="data" xsi:type="array">
+            <item name="options" xsi:type="object">Magento\Config\Model\Config\Source\Yesno</item>
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">10</item>
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="label" xsi:type="string" translate="true">Use Static Block </item>
+                </item>
+            </argument>
+        </field>  
+        <field name="use_static_block_top">
+            <argument name="data" xsi:type="array">
+            <item name="options" xsi:type="object">Magento\Config\Model\Config\Source\Yesno</item>
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">11</item>
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="label" xsi:type="string" translate="true">Use Static Block Top </item>
+                </item>
+            </argument>
+        </field>     
+        <field name="static_block_top_value">
+            <argument name="data" xsi:type="array">
+            <item name="options" xsi:type="object">Magento\Catalog\Model\Category\Attribute\Source\Page</item>
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">12</item>
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="label" xsi:type="string" translate="true">Static Block Top Value </item>
+                </item>
+            </argument>
+        </field> 
+        <field name="use_static_block_left">
+            <argument name="data" xsi:type="array">
+            <item name="options" xsi:type="object">Magento\Config\Model\Config\Source\Yesno</item>
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">13</item>
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="label" xsi:type="string" translate="true">Use Static Block Left </item>
+                </item>
+            </argument>
+        </field>     
+        <field name="static_block_left_value">
+            <argument name="data" xsi:type="array">
+            <item name="options" xsi:type="object">Magento\Catalog\Model\Category\Attribute\Source\Page</item>
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">14</item>
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="label" xsi:type="string" translate="true">Static Block Left Value </item>
+                </item>
+            </argument>
+        </field>  
+        <field name="use_static_block_bottom">
+            <argument name="data" xsi:type="array">
+            <item name="options" xsi:type="object">Magento\Config\Model\Config\Source\Yesno</item>
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">15</item>
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="label" xsi:type="string" translate="true">Use Static Block Bottom </item>
+                </item>
+            </argument>
+        </field>     
+        <field name="static_block_bottom_value">
+            <argument name="data" xsi:type="array">
+            <item name="options" xsi:type="object">Magento\Catalog\Model\Category\Attribute\Source\Page</item>
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">16</item>
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="label" xsi:type="string" translate="true">Static Block Bottom Value </item>
+                </item>
+            </argument>
+        </field>  
+        <field name="use_static_block_right">
+            <argument name="data" xsi:type="array">
+            <item name="options" xsi:type="object">Magento\Config\Model\Config\Source\Yesno</item>
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">17</item>
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="label" xsi:type="string" translate="true">Use Static Block Right </item>
+                </item>
+            </argument>
+        </field>     
+        <field name="static_block_right_value">
+            <argument name="data" xsi:type="array">
+            <item name="options" xsi:type="object">Magento\Catalog\Model\Category\Attribute\Source\Page</item>
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">18</item>
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="label" xsi:type="string" translate="true">Static Block Right Value </item>
+                </item>
+            </argument>
+        </field> 
+        <field name="level_column_count">
+            <argument name="data" xsi:type="array">
+            <item name="options" xsi:type="object">Ibnab\MegaMenu\Model\Category\Attribute\Source\Level</item>
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">19</item>
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="label" xsi:type="string" translate="true">Level Column Count </item>
+                </item>
+            </argument>
+        </field> 
+        <field name="disabled_children">
+            <argument name="data" xsi:type="array">
+            <item name="options" xsi:type="object">Magento\Config\Model\Config\Source\Yesno</item>
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">20</item>
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="label" xsi:type="string" translate="true">Disabled Category Children </item>
+                </item>
+            </argument>
+        </field> 
+        <field name="category_is_link">
+            <argument name="data" xsi:type="array">
+            <item name="options" xsi:type="object">Magento\Config\Model\Config\Source\Yesno</item>
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">19</item>
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="label" xsi:type="string" translate="true">Is Link </item>
+                </item>
+            </argument>
+        </field>    
+    </fieldset>
+</form>

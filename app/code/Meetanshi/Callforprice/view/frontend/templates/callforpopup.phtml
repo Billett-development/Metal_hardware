@@ -1,0 +1,149 @@
+<?php
+$helper = $this->helper('Meetanshi\Callforprice\Helper\Data');
+?>
+<div class="callfor-popup">
+    <form id="frmcallforprice" class="frmcallforprice" action="#" data-mage-init='{"validation":{}}'">
+    <input type="hidden" id="callProductId" name="callProductId" value="">
+    <div class="field customer-name required">
+        <label class="label" for="cname">
+                <span><?php /* @escapeNotVerified */
+                    echo __('Name') ?></span><em>*</em>
+        </label>
+        <div class="control">
+            <input id="cname" name="cname" value="" title="<?php /* @escapeNotVerified */
+            echo __('Customer Name') ?>" class="input-text required-entry"
+                   data-validate="{required:true}" autocomplete="off" aria-required="true" type="text">
+        </div>
+    </div>
+    <div class="field required">
+        <label for="email_address" class="label"><span><?php /* @escapeNotVerified */
+                echo __('Email') ?></span><em>*</em></label>
+        <div class="control">
+            <input name="email" autocomplete="email" id="email_address" value="" title="<?php /* @escapeNotVerified */
+            echo __('Email') ?>" class="input-text"
+                   data-validate="{required:true, 'validate-email':true}" aria-required="true" type="email">
+        </div>
+    </div>
+    <div class="field country required">
+        <label class="label" for="country"><span><?php /* @escapeNotVerified */
+                echo __('Country') ?></span></label>
+        <div class="control">
+            <?php echo $block->getAvailableCountries(); ?>
+        </div>
+    </div>
+    <div class="field required">
+        <label for="phone_number" class="label"><span><?php /* @escapeNotVerified */
+                echo __('Phone Number') ?></span><em>*</em></label>
+        <div class="control">
+            <input name="phone_number" autocomplete="phone_number" id="phone_number" value="" title="<?php /* @escapeNotVerified */
+            echo __('phone_number') ?>"
+                   class="input-text" data-validate="{required:true, 'validate-number':true}" aria-required="true"
+                   type="text">
+        </div>
+    </div>
+    <div class="field required">
+        <label for="comment" class="label"><span><?php /* @escapeNotVerified */
+                echo __('Inquiry Message') ?></span><em>*</em></label>
+        <div class="control">
+                <textarea name="comment" id="comment" value="" title="<?php /* @escapeNotVerified */
+                echo __('comment') ?>" class="textarea"
+                          data-validate="{required:true}" aria-required="true"></textarea>
+        </div>
+    </div>
+    <?php if ($helper->isEnablePrivacy()){?>
+        <div class="field required">
+            <div class="control">
+                <input type="checkbox" name="privacy" id="privacy" value="checked" title="<?php /* @escapeNotVerified */
+                echo __('privacy') ?>" class="checkbox"
+                       data-validate="{required:true}" aria-required="true"/><em>*</em>
+                <label for="privacy" class="label"><span><?php echo $helper->getPrivacyText() ?><a href="<?php echo $helper->getPrivacyPageUrl() ?>" target="_blank" style="padding-left: 5px"><?php /* @escapeNotVerified */
+                            echo __('Privacy Policy') ?></a></span></label>
+            </div>
+        </div>
+    <?php }
+    if($helper->captchaEnable()){ ?>
+        <input type="hidden" id="g-recaptcha-response" class="g-recaptcha-response" name="g-recaptcha-response" value="">
+    <?php }?>
+    </form>
+</div>
+
+<?php if ($helper->captchaEnable()){?>
+    <script src='https://www.google.com/recaptcha/api.js?render=<?php echo $helper->getSiteKey(); ?>'></script>
+    <script>
+        grecaptcha.ready(function () {
+            grecaptcha.execute('<?php echo $helper->getSiteKey();?>', {action: 'review'})
+                .then(function (token) {
+                    jQuery('.g-recaptcha-response').val(token);
+                });
+        });
+    </script>
+<?php }?>
+
+<script>
+    require(
+        [
+            'jquery',
+            'Magento_Ui/js/modal/modal',
+            'mage/url',
+            'mage/validation'
+        ],
+        function (
+            $,
+            modal,
+            url
+        ) {
+            var titleText = '<?php echo $helper->getTitleText(); ?>';
+            var callforoption = {
+                type: 'popup',
+                modalClass: 'callforprice-popup',
+                responsive: true,
+                innerScroll: true,
+                clickableOverlay: false,
+                title: titleText,
+                buttons: [{
+                    text: $.mage.__('Submit'),
+                    class: 'action primary',
+                    click: function () {
+                        var productId = $('#callProductId').val();
+                        var dataForm = $('#frmcallforprice');
+                        var ignore = null;
+                        dataForm.mage('validation', {
+                            ignore: ignore ? ':hidden:not(' + ignore + ')' : ':hidden'
+                        }).find('input:text').attr('autocomplete', 'off');
+
+                        if (dataForm.validation('isValid')) {
+                            var linkUrl = url.build('callforprice/index/index');
+                            $.ajax({
+                                url: linkUrl,
+                                type: 'POST',
+                                data: $("#frmcallforprice").serialize(),
+                                showLoader: true,
+                                success: function (response) {
+                                    if (response.succeess) {
+                                        $('.callfor-popup').modal('closeModal');
+                                    }
+                                    $('.callfor-popup').modal('closeModal');
+                                }
+                            });
+                        }
+                    }
+                }
+                ]
+            };
+            var callforoption = modal(callforoption, $('.callfor-popup'));
+        }
+    );
+</script>
+<script type="text/javascript">
+    require(['jquery', 'jquery/ui'], function ($) {
+        $(document).ready(function ($) {
+            $('#cname').val('<?php echo $block->getLogginCustomerName() ?>');
+            $('#email_address').val('<?php echo $block->getLogginCustomerEmail() ?>');
+            $('.opencallforpopup').on('click', function () {
+                var productId = $(this).next('.callforid').val();
+                $('#callProductId').val(productId);
+                $('.callfor-popup').modal('openModal');
+            });
+        });
+    });
+</script>

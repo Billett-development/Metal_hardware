@@ -1,0 +1,114 @@
+<!-- ko if: getEnabled() == 1 -->
+<form name="co-shipping-form" id="co-shipping-form" method="post" enctype="multipart/form-data" data-bind="attr: { action: $t(getOrdercommentbaseurl())}"
+ >
+<div class="block block-custom-info">
+    <!-- ko if: getEnabledFileupload() == 1 || getEnabledOrdercomment() == 1 -->
+
+         <!-- ko if: getOrdercommentTitle() -->
+              <p class="block-custom-info-title" data-bind="text: getOrdercommentTitle()"></p>
+         <!-- /ko -->
+
+    <div class="block-order-comments">
+
+       <!-- ko if: getEnabledFileupload() == 1 -->
+        <div class="block-order-for">
+            <div class="block-inner">
+                <!-- ko if: getOrderfileTexttitle() -->
+                     <span class="order-for-block-title" data-bind="text: getOrderfileTexttitle()"></span>
+
+                         <!-- ko if: getOrdercommentfile() == 1 -->
+                               <span class="required-icon">*</span>
+                         <!-- /ko -->
+                <!-- /ko -->
+                <div class="block-content">
+
+                 <!-- ko if: getOrdercommentfile() == 1 && getfileuploadvalue() == "" -->
+                    <input type="file" name="order_for" id="order_for_required">
+                      <span class="file-upload-type-allowed" data-bind="text: getOrdercommentsFiletype()"></span>
+                    <div class="mage-error order_for_required_error" id="order_for_required_error" generated="true" ></div>
+                 <!-- /ko -->
+
+                 <!-- ko if: getOrdercommentfileNo() == 0 || getfileuploadvalue() -->
+                    <input type="file" name="order_for" id="order_for">
+                    <span class="file-upload-type-allowed" data-bind="text: getOrdercommentsFiletype()"></span>
+                 <!-- /ko -->
+               
+                    <!-- ko if: getfileuploadStatus() == 1 -->
+                     	<div class="file-uploded">   
+						<span class="file-upload-status" data-bind="text: getfileuploadvalue()"></span>
+                        <!-- ko if: getfileuploadvalue() && getfileuploadvalue() != "" -->
+                           <a href="orderfiledelete/index" class="order-file-removelink remove-file-icon"> Remove</a>
+                        <!-- /ko -->
+                     	</div>
+					 <!-- /ko -->
+
+                      <!-- ko if: getFileuploadvalustatus() != "" && getfileuploadStatus() == 0 -->
+                        <span class="file-upload-disallowedtype" data-bind="text: getFileuploadvalustatus()"></span>
+                     <!-- /ko -->
+
+                </div>
+            </div>
+        </div>
+       <!-- /ko -->
+        <!-- ko if: getEnabledOrdercomment() == 1 -->
+        <div class="block-order-comment">
+            <div class="block-inner">
+
+                <!-- ko if: getOrdercommentTexttitle() -->
+                     <span class="order-comment-block-title" data-bind="text: getOrdercommentTexttitle()"></span>
+                      <!-- ko if: getOrdercommentfield()== 1 -->
+                               <span class="required-icon">*</span>
+                         <!-- /ko -->
+                 <!-- /ko -->
+
+                <div class="block-content">
+
+                        <!-- ko if: getOrdercommentfield() == 1 && getorderCommentstext() == null -->
+                          <textarea name="order_comments" id="order_comments_required" maxlength="200" placeholder="Enter Your Comments (maximum 200 character)" ></textarea>
+                          <div class="mage-error order_comments_required_error" id="order_comments_required_error" generated="true" ></div>
+                        <!-- /ko -->
+
+                        <!-- ko if: getOrdercommentfield() == 1 && getorderCommentstext() == "" -->
+                          <textarea name="order_comments" id="order_comments_required" maxlength="200" placeholder="Enter Your Comments (maximum 200 character)" ></textarea>
+                          <div class="mage-error order_comments_required_error" id="order_comments_required_error" generated="true" ></div>
+                        <!-- /ko -->
+
+                         <!-- ko if: getOrdercommentfield() == 1 && getorderCommentstext() -->
+                          <textarea name="order_comments" id="order_comments" maxlength="200" placeholder="Enter Your Comments (maximum 200 character)"></textarea>
+                        <!-- /ko -->
+
+                        <!-- ko if: getOrdercommentfield() == 0 && getorderCommentstext() == null -->
+                          <textarea name="order_comments" id="order_comments" maxlength="200" placeholder="Enter Your Comments (maximum 200 character)"></textarea>
+                        <!-- /ko -->
+
+                        <!-- ko if: getOrdercommentfield() == 0 && getorderCommentstext() == "" -->
+                          <textarea name="order_comments" id="order_comments" maxlength="200" placeholder="Enter Your Comments (maximum 200 character)"></textarea>
+                        <!-- /ko -->
+
+                        <!-- ko if: getOrdercommentfield() == 0 && getorderCommentstext() -->
+                          <textarea name="order_comments" id="order_comments" maxlength="200" placeholder="Enter Your Comments (maximum 200 character)"></textarea>
+                        <!-- /ko -->
+
+                             <!-- ko if: getOrdercommentsStatus() == 1 && getorderCommentstext() != "" -->
+                                <p class="block-title" data-bind="text: getorderCommentstext()"></p>
+                              <!-- /ko -->
+
+                    <!-- ko if: getOrdercommentsStatus() == 1 && getorderCommentstext() -->
+                        <a href="ordercommentdelete/index" class="order-comment-removelink remove-comment-icon"> Remove Comment</a>
+                     <!-- /ko -->
+
+                </div>
+            </div>
+        </div>
+         <!-- /ko -->
+
+         <!-- ko if: getEnabledFileupload() == 1 || getEnabledOrdercomment() == 1 -->
+              <div class="submit-btn">
+			  		   <input type="submit" name="order-comment" id="order-comment" value="Save" class="order-comment-btn" >
+         	   </div>
+		 <!-- /ko -->
+    </div>
+ <!-- /ko -->
+</div>
+</form>
+<!-- /ko -->

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+      <add id="Tom_Magento1Orders::Magento1"
+		title="xxx" 
+		translate="title"
+		module="Tom_Magento1Orders" 
+		parent="Magento_Sales::sales" 
+		sortOrder="50" 
+		dependsOnModule="Tom_Magento1Orders"
+		resource="Tom_Magento1Orders::Magento1"/>
+
+      <add id="Tom_Magento1Orders::Magento1_Orders"
+		title="xxx"
+		translate="title"
+		module="Tom_Magento1Orders"
+		parent="Tom_Magento1Orders::Magento1"
+		sortOrder="10"
+		dependsOnModule="Tom_Magento1Orders"
+		action="Magento1Orders/orders"
+		resource="Tom_Magento1Orders::Magento1"/>
+    </menu>
+</config>

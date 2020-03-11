@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Backend/etc/menu.xsd">
+    <menu>
+        <add id="Vsourz_Imagegallery::imagegalleryadmin"
+            resource="Vsourz_Imagegallery::imagegalleryadmin"
+            module="Vsourz_Imagegallery"
+            title="Image Gallery" 
+            sortOrder="10" />
+
+        <add id="Vsourz_Imagegallery::imagegallery_image" 
+            resource="Vsourz_Imagegallery::imagegallery_image"
+            module="Vsourz_Imagegallery" 
+            parent="Vsourz_Imagegallery::imagegalleryadmin" 
+            action="imagegalleryadmin/image" 
+            title="Manage Image" 
+            sortOrder="1" /> 
+
+        <add id="Vsourz_Imagegallery::imagegallery_category" 
+            resource="Vsourz_Imagegallery::imagegallery_category" 
+            module="Vsourz_Imagegallery" 
+            parent="Vsourz_Imagegallery::imagegalleryadmin" 
+            action="imagegalleryadmin/category" 
+            title="Manage Category" 
+            sortOrder="2" 
+            />
+            
+    </menu>
+</config>

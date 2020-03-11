@@ -1,0 +1,44 @@
+<?php  $Enabled               =  $this->helper('Vsourz\Ordercomment\Helper\Data')->isEnabled();
+       $CommentEnabled        =  $this->helper('Vsourz\Ordercomment\Helper\Data')->getOrdercomment();
+       $FileAttachmentEnabled =  $this->helper('Vsourz\Ordercomment\Helper\Data')->getOrderfileupload();
+
+if($Enabled == 1){
+?>
+<?php if($CommentEnabled == 1 && $block->getOrderComments() != NULL){ ?>
+<section class="admin__page-section order-addresses">
+    <div class="admin__page-section-title">
+        <span class="title"><?php echo __('Order Comments');?></span>
+    </div>
+    <div class="admin__page-section-content">
+        <div class="admin__page-section-item order-comments">
+            <div class="admin__page-section-item-content">
+                <?php echo $block->getOrderComments();?>
+            </div>
+        </div>
+    </div>
+</section>
+<?php }
+
+if($FileAttachmentEnabled == 1 && $block->getOrderFor() != NULL){ ?>
+<section class="admin__page-section order-addresses">
+    <div class="admin__page-section-title">
+        <span class="title"><?php echo __('Order File Attachment');?></span>
+    </div>
+    <div class="admin__page-section-content">
+        <div class="admin__page-section-item order-for">
+            <div class="admin__page-section-item-content">
+                <?php
+                $_objectManager = \Magento\Framework\App\ObjectManager::getInstance(); //instance of\Magento\Framework\App\ObjectManager
+                $storeManager = $_objectManager->get('Magento\Store\Model\StoreManagerInterface');
+                $currentStore = $storeManager->getStore();
+                $mediaUrl = $currentStore->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+                ?>
+                <?php echo __('Download File : ');?>
+                <a href="<?php echo $mediaUrl.'vsourz/orderfileattachment/'.$block->getOrderFor();?>" download><?php echo $block->getOrderFor();?> </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<?php }
+} ?>
